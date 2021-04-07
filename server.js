@@ -7,16 +7,18 @@ const app = express();
 connectDb(); //Connect to local database
 const mysql = require("./Utils/Database2").pool;
 
-
-
 /*Middleware function to use request.body */
 app.use(express.json());
 
 //Routes
 const admin = require("./Routes/Admin");
+const Group = require("./Routes/Group");
+const Module = require("./Routes/Module");
 
 //Connect to the routes
 app.use("/api/v1/", admin);
+app.use("/api/v1/", Group);
+app.use("/api/v1/", Module);
 
 //Listen to port
 app.listen(process.env.PORT || 5000, () => {
