@@ -38,6 +38,15 @@ exports.deletegroup = async (req, res, next) => {
       if (err) {
         throw err;
       }
+
+      //Delete from the link table first
+      const tquery = "DELETE FROM G_LINK WHERE G_ID = (" + req.body.g_id + ");";
+      conn.query(tquery,function(err,rows){
+        if(err){
+          throw err;
+        }
+      });
+      //Delete from the group table 
       const query = "DELETE FROM C_GROUP WHERE G_ID = (" + req.body.g_id + ");";
       conn.query(query, function (err, rows) {
         if (err) {

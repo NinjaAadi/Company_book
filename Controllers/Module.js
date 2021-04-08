@@ -38,6 +38,15 @@ exports.deletemodule = async (req, res, next) => {
       if (err) {
         throw err;
       }
+      //delete the module from the module link table
+      const tquery = "DELETE FROM M_LINK WHERE M_ID = (" + req.body.m_id + ");";
+      conn.query(tquery, function (err, rows) {
+        if (err) {
+          throw err;
+        }
+      });
+
+      //delete the module from the module table
       const query =
         "DELETE FROM C_MODULE WHERE M_ID = (" + req.body.m_id + ");";
       conn.query(query, function (err, rows) {
