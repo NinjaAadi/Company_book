@@ -104,3 +104,6 @@ exports.getallnames = async (req, res, next) => {
     console.log("Error in fetching company based on first name...", error);
   }
 };
+/*
+ 
+*/

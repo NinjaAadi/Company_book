@@ -170,11 +170,38 @@ exports.getallcompanies = async (req, res, next) => {
           map_allcompanies(resolve);
         });
         promise1.then(() => {
-          console.log("Data being returned".green);
-          returndata();
+          //new promise being created for fetching all the persons name
+          const promise2 = new Promise((resolve, reject) => {
+            getpersons(resolve);
+          });
+          promise2.then(() => {
+            console.log("Data being returned".green);
+            returndata();
+          });
         });
       }
-
+      function getpersons(resolve) {
+        let c_count = c_data.length;
+        console.log("Persons being matched...");
+        c_data.map((company) => {
+          c_count--;
+          fetchperson(resolve, company, c_count);
+        });
+      }
+      function fetchperson(resolve, company, c_count) {
+        const id = company.C_ID;
+        let qquery = "SELECT * FROM C_PERSON WHERE C_ID = " + id + ";";
+        company["C_PERSON"] = [];
+        conn.query(qquery, function (err, rows) {
+          if (err) {
+            throw err;
+          }
+          company["C_PERSON"] = rows;
+          if (c_count === 0) {
+            resolve("Success");
+          }
+        });
+      }
       //Function to return data after fetching the group and module ids
       function returndata() {
         return res.status(200).json({
