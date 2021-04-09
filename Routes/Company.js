@@ -5,10 +5,11 @@ const {
   createcompany,
   deletecompany,
   getallcompanies,
+  editcompany,
 } = require("../Controllers/Company");
 
-
 router.route("/company/createcompany").post(validator, createcompany);
+router.route("/company/editcompany").post(validator, editcompany);
 router.route("/company/deletecompany").delete(validator, deletecompany);
 router.route("/company/getallcompanies").get(validator, getallcompanies);
 

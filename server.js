@@ -16,7 +16,8 @@ const Group = require("./Routes/Group");
 const Module = require("./Routes/Module");
 const company = require("./Routes/Company");
 const field = require("./Routes/Field");
-
+const person = require("./Routes/Person");
+const query = require("./Routes/Query");
 
 //Connect to the routes
 app.use("/api/v1/", admin);
@@ -24,6 +25,8 @@ app.use("/api/v1/", Group);
 app.use("/api/v1/", Module);
 app.use("/api/v1/", company);
 app.use("/api/v1/", field);
+app.use("/api/v1/", person);
+app.use("/api/v1/", query);
 
 //Listen to port
 app.listen(process.env.PORT || 5000, () => {

@@ -32,7 +32,7 @@ exports.createcompany = async (req, res, next) => {
       query1 += ")";
       query2 += ");";
       query1 += query2;
-      
+
       var companyid;
       conn.query(query1, async function (err, rows) {
         companyid = await rows.insertId;
@@ -104,7 +104,8 @@ exports.deletecompany = async (req, res, next) => {
         throw err;
       }
       const c_id = req.body.c_id;
-      //First delete the company from group link and module link table
+      //First delete the company from group link and module link table and
+      //Delete the company's contact list persons from the person's table
       let query = "DELETE FROM M_LINK WHERE C_ID = " + c_id + ";";
       conn.query(query, function (err, rows) {
         if (err) {
@@ -117,7 +118,12 @@ exports.deletecompany = async (req, res, next) => {
           throw err;
         }
       });
-
+      query = "DELETE FROM C_PERSON WHERE C_ID = " + c_id + ";";
+      conn.query(query, function (err, rows) {
+        if (err) {
+          throw err;
+        }
+      });
       //Delete the company from the main company table
       query = "DELETE FROM COMPANY WHERE C_ID = " + c_id + ";";
       conn.query(query, function (err, rows) {
@@ -145,15 +151,73 @@ exports.getallcompanies = async (req, res, next) => {
       if (err) {
         throw err;
       }
+      let c_data;
       const query = "SELECT * FROM COMPANY";
       conn.query(query, function (err, rows) {
         if (err) {
           throw err;
         }
-        res.status(200).json({
-          rows,
-        });
+        c_data = rows;
+
+        //Call the promise function
+        createpromise();
       });
+
+      //Create a promise and then call map all companies and then return data as a call back
+      function createpromise() {
+        console.log("Promise is being created...".yellow);
+        const promise1 = new Promise((resolve, reject) => {
+          map_allcompanies(resolve);
+        });
+        promise1.then(() => {
+          console.log("Data being returned".green);
+          returndata();
+        });
+      }
+
+      //Function to return data after fetching the group and module ids
+      function returndata() {
+        return res.status(200).json({
+          c_data,
+        });
+      }
+
+      //Function to map for all the companies and fetch their data
+      function map_allcompanies(resolve) {
+        console.log("Data is being fetched for all companies".yellow);
+        let count = c_data.length;
+        c_data.map((company) => {
+          count--;
+          fetchdata(company, resolve, count);
+        });
+      }
+
+      //Fetch data for each company
+      function fetchdata(company, resolve, count) {
+        console.log("fetchdata function is being called...".blue);
+        const id = company.C_ID;
+        company["C_G_ID"] = [];
+        company["C_M_ID"] = [];
+        let query = "SELECT * FROM G_LINK WHERE C_ID = " + id + ";";
+        conn.query(query, function (err, rows) {
+          for (i = 0; i < rows.length; i++) {
+            company["C_G_ID"].push(rows[i].G_ID);
+          }
+        });
+        query = "SELECT * FROM M_LINK WHERE C_ID = " + id + ";";
+        conn.query(query, function (err, rows) {
+          for (i = 0; i < rows.length; i++) {
+            company["C_M_ID"].push(rows[i].M_ID);
+          }
+          //Resolve the promise when the query function gets completed
+          if (count === 0) {
+            console.log(
+              "Promise is being resolved when the count becomes zero...".rainbow
+            );
+            resolve("Success!");
+          }
+        });
+      }
     });
   } catch (error) {
     console.log("Error in fetching all the companis", err);
@@ -162,6 +226,102 @@ exports.getallcompanies = async (req, res, next) => {
 
 /*
 @desc : Edit Company details 
-@route:
+@route: company/editcompany
 @access :private
 */
+exports.editcompany = async (req, res, next) => {
+  try {
+    console.log("Company details being modified...");
+    mysql.getConnection(function (err, conn) {
+      if (err) {
+        throw err;
+      }
+      //Delete all the groups with this c_id
+      //Delete all the modules with this c_id
+      //Update all the fiels of the company
+      mysql.getConnection(function (err, conn) {
+        if (err) {
+          throw err;
+        }
+        const queryobj = req.body;
+        const companyid = req.body.C_ID;
+        //Delete from the groups link
+        let query = "DELETE FROM G_LINK WHERE C_ID = " + companyid + ";";
+        conn.query(query, function (err, rows) {
+          if (err) {
+            throw err;
+          }
+        });
+
+        //Delete from the module link
+        query = "DELETE FROM M_LINK WHERE C_ID = " + companyid + ";";
+        conn.query(query, function (err, rows) {
+          if (err) {
+            throw err;
+          }
+        });
+        //Insert the new group link and module link
+        const group = req.body.C_G_ID;
+        const module = req.body.C_M_ID;
+        let values = [];
+        //Insert into the link table for groups
+        for (var i = 0; i < group.length; i++) {
+          const temp = [companyid, group[i]];
+          values.push(temp);
+        }
+        //If the given group size is greater than 0
+        if (group.length > 0) {
+          query = "INSERT INTO  G_LINK (C_ID,G_ID) VALUES ?";
+          conn.query(query, [values], function (err, rows) {
+            if (err) {
+              return res.status(400).json({
+                err,
+              });
+            }
+          });
+        }
+
+        //Insert into the link table for modules
+        values = [];
+        for (var i = 0; i < module.length; i++) {
+          const temp = [companyid, module[i]];
+          values.push(temp);
+        }
+        //If the given module size is greater than 0
+        if (module.length > 0) {
+          query = "INSERT INTO  M_LINK (C_ID,M_ID) VALUES ?";
+          conn.query(query, [values], function (err, rows) {
+            if (err) {
+              return res.status(400).json({
+                err,
+              });
+            }
+          });
+        }
+
+        //Now update the information for the table
+        query = "UPDATE COMPANY SET ";
+        const name = Object.keys(queryobj);
+        const value = Object.values(queryobj);
+        let n = value.length;
+        for (var i = 3; i < n - 2; i++) {
+          const K = name[i];
+          const V = value[i];
+          query += K + "=" + "'" + V + "',";
+        }
+        query = query.slice(0, query.length - 1);
+        query += "WHERE C_ID = " + companyid + ";";
+        conn.query(query, function (err, rows) {
+          if (err) {
+            throw err;
+          }
+        });
+        return res.status(200).json({
+          message: "Company details updated successfully!",
+        });
+      });
+    });
+  } catch (error) {
+    console.log("Error in updating the company details", error);
+  }
+};
