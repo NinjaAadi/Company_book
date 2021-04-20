@@ -1,11 +1,7 @@
-import React,{Fragment} from 'react'
+import React, { Fragment } from "react";
 
 const GetAllCompanies = () => {
-    return (
-        <div>
-            
-        </div>
-    )
-}
+  return <div></div>;
+};
 
-export default GetAllCompanies
+export default GetAllCompanies;

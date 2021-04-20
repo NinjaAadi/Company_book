@@ -11,6 +11,6 @@ const {
 router.route("/company/createcompany").post(validator, createcompany);
 router.route("/company/editcompany").post(validator, editcompany);
 router.route("/company/deletecompany").delete(validator, deletecompany);
-router.route("/company/getallcompanies").get(validator, getallcompanies);
+router.route("/company/getallcompanies").post(validator, getallcompanies);
 
 module.exports = router;
