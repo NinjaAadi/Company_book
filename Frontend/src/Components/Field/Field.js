@@ -4,22 +4,27 @@ import { connect } from "react-redux";
 import { useHistory } from "react-router-dom";
 import classes from "./Field.module.css";
 import DeletePopup from "../DeletePop/DeletePopup";
+import EditPopup from "../EditPop/EditPop";
 //Import action files
 import { getfields } from "../../Actions/Getfields";
 
 //util to create new field
 import createfield from "../../Utils/CreateField";
+import deletefield from "../../Utils/DeleteField";
+import editfield from "../../Utils/EditField";
 const Field = (props) => {
   const history = useHistory();
 
   const [fname, setfname] = useState("");
   const [message, setmessage] = useState("");
   const [toggler, settoggler] = useState(false);
+  const [toggler2, settoggler2] = useState(false);
   const [name, setnamedelete] = useState();
+  const [name2, setnamedelete2] = useState();
   const onchange = (e) => {
     setfname(e.target.value);
   };
-
+  /*------------------------Toggler 1--------------------- */
   const toggle = () => {
     if (toggler == false) {
       settoggler(true);
@@ -27,11 +32,29 @@ const Field = (props) => {
       settoggler(false);
     }
   };
-
+  const close = () => {
+    settoggler(false);
+  };
   const setnametodelete = (e, name) => {
     setnamedelete(name);
     toggle();
   };
+  /*------------------------Toggler 2--------------------- */
+  const toggle2 = () => {
+    if (toggler2 == false) {
+      settoggler2(true);
+    } else {
+      settoggler2(false);
+    }
+  };
+  const close2 = () => {
+    settoggler2(false);
+  };
+  const setnametoedit2 = (e, oldname) => {
+    setnamedelete2(oldname);
+    toggle2();
+  };
+  /* ------------------------------------------------------*/
   const fieldname = fname;
 
   //Function to create field
@@ -65,7 +88,7 @@ const Field = (props) => {
       await props.getfields();
     }
     fetchfield();
-  }, []);
+  }, [toggler, toggler2]);
 
   if (props.fields.isfetched === false) {
     return <div>Not Fetcheds</div>;
@@ -73,10 +96,16 @@ const Field = (props) => {
     return (
       <Fragment>
         {toggler == true ? (
-          <DeletePopup p_value={name} />
+          <DeletePopup p_value={name} toggler={close} mainfunc={deletefield} />
         ) : (
           <Fragment></Fragment>
         )}
+        {toggler2 == true ? (
+          <EditPopup toggler={close2} oldname={name2} mainfunc={editfield} />
+        ) : (
+          <Fragment></Fragment>
+        )}
+
         <div className={classes["body"]}>
           <div className={classes["head"]}>
             <h1 className={classes["h1"]}>User Defined Fields</h1>
@@ -129,7 +158,10 @@ const Field = (props) => {
                       style={{ color: "darkgreen" }}
                       className={classes["td"]}
                     >
-                      <i class="far fa-edit"></i>
+                      <i
+                        class="far fa-edit"
+                        onClick={(e) => setnametoedit2(e, i.NAME)}
+                      ></i>
                     </td>
                   </tr>
                 );

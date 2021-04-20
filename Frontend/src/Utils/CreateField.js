@@ -1,6 +1,7 @@
 import axios from "axios";
 import host from "../host";
 const createfield = async (name) => {
+  name = name.split(" ").join("");
   try {
     if (name.length == 0) {
       return false;
@@ -16,7 +17,6 @@ const createfield = async (name) => {
     const password = "123456";
     //Endpoint
     const endpoint = host + "/api/v1/field/createfield";
-    console.log(endpoint);
     const data = {
       email,
       password,

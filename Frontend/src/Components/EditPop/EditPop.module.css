@@ -1,0 +1,40 @@
+@import url("https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@500&display=swap");
+.body {
+  text-align: center;
+  padding-top: 10px;
+  width: 25rem;
+  height: 22vh;
+  z-index: 20;
+  position: relative;
+  background-color: white;
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 50px;
+  font-family: "Source Sans Pro", sans-serif !important;
+}
+.form {
+  width: 90%;
+  height: auto;
+  margin: auto;
+}
+.btn {
+  background-color: #00af91;
+  color: white;
+  border: 2px solid #00af91;
+  margin-left: 5px;
+  cursor: pointer;
+  padding: 5px;
+}
+.btn-2 {
+  background-color: orangered;
+  color: white;
+  border: 2px solid orangered;
+  padding: 5px;
+  cursor: pointer;
+  margin-left: 5px;
+}
+.input {
+  padding: 5px;
+}

@@ -1,8 +1,11 @@
 import axios from "axios";
 import host from "../host";
-const deletefield = async (name) => {
-  name = name.split(" ").join("");
+const editfield = async (old_name, new_name) => {
+  new_name = new_name.split(" ").join("");
   try {
+    if (new_name.length === 0) {
+      return false;
+    }
     const config = {
       headers: {
         "Content-Type": "application/json",
@@ -13,11 +16,12 @@ const deletefield = async (name) => {
     const email = "aaditya@gmail.com";
     const password = "123456";
     //Endpoint
-    const endpoint = host + "/api/v1/field/deletefield";
+    const endpoint = host + "/api/v1/field/editfield";
     const data = {
       email,
       password,
-      field_name: name,
+      old_name,
+      new_name,
     };
     const res = await axios.post(endpoint, data, config);
     return true;
@@ -26,4 +30,4 @@ const deletefield = async (name) => {
   }
 };
 
-export default deletefield;
+export default editfield;
