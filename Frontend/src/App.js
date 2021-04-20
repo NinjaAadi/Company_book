@@ -1,14 +1,19 @@
 import React, { Fragment } from "react";
 import { Provider } from "react-redux";
 import Store from "./Store";
+import { BrowserRouter, Route } from "react-router-dom";
+
+//Import the components
+import Home from "./Components/Home/Home";
+
 const App = () => {
   return (
     <Provider store={Store}>
-      <Fragment>
-        <div>
-          <h1>Hello world</h1>
-        </div>
-      </Fragment>
+      <BrowserRouter>
+        <Fragment>
+          <Route exact path="/" component={Home} />
+        </Fragment>
+      </BrowserRouter>
     </Provider>
   );
 };
