@@ -5,6 +5,7 @@ import { BrowserRouter, Route } from "react-router-dom";
 
 //Import the components
 import Home from "./Components/Home/Home";
+import GetAllCompanies from "./Components/Company/GetAllCompanies";
 
 const App = () => {
   return (
