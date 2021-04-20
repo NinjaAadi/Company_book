@@ -1,0 +1,17 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap%27');
+.forms{
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    /* background-color: blue; */
+    margin: 5%;
+    font-family: 'Open Sans', sans-serif;
+}
+
+
+@media only screen and (max-width: 800px){
+        .forms{
+            display: flex;
+            flex-direction: column;
+        }
+}
