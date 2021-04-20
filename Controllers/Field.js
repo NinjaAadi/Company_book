@@ -13,28 +13,44 @@ exports.createfield = async (req, res, next) => {
       }
       const { field_name, field_original } = req.body;
       let query =
-        "INSERT INTO C_FIELDS (NAME,ISORIGINAL) VALUES (" +
-        "'" +
-        field_name +
-        "'," +
-        field_original +
-        ");";
-      //Insert into field table
-      conn.query(query, function (err, rows) {
-        if (err) {
-          throw err;
-        }
-      });
+        "SELECT * FROM C_FIELDS WHERE NAME = " + "'" + field_name + "';";
+      new Promise((resolve, reject) => {
+        conn.query(query, function (err, rows) {
+          if (err) {
+            throw err;
+          }
+          if (rows.length > 0) {
+            return res.status(400).json({
+              message: "Field already exists",
+            });
+          }
+          resolve("Success");
+        });
+      }).then(() => {
+        query =
+          "INSERT INTO C_FIELDS (NAME,ISORIGINAL) VALUES (" +
+          "'" +
+          field_name +
+          "'," +
+          field_original +
+          ");";
+        //Insert into field table
+        conn.query(query, function (err, rows) {
+          if (err) {
+            throw err;
+          }
+        });
 
-      //Insert into the company table
-      query = "ALTER TABLE COMPANY ADD " + field_name + " VARCHAR(255);";
-      conn.query(query, function (err, rows) {
-        if (err) {
-          throw err;
-        }
-      });
-      return res.status(200).json({
-        message: "Field added successfully!",
+        //Insert into the company table
+        query = "ALTER TABLE COMPANY ADD " + field_name + " VARCHAR(255);";
+        conn.query(query, function (err, rows) {
+          if (err) {
+            throw err;
+          }
+        });
+        return res.status(200).json({
+          message: "Field added successfully!",
+        });
       });
     });
   } catch (error) {
@@ -103,7 +119,7 @@ exports.deletefield = async (req, res, next) => {
       if (err) {
         throw err;
       }
-      const field_name = req.body.field_name;
+      const field_name = req.body.field_id;
       let query =
         "DELETE FROM C_FIELDS WHERE NAME = " + "'" + field_name + "';";
       conn.query(query, function (err, rows) {

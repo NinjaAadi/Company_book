@@ -1,6 +1,7 @@
 const express = require("express");
 require("colors");
 require("dotenv").config();
+const cors = require("cors");
 const connectDb = require("./Utils/database");
 
 const app = express();
@@ -9,7 +10,7 @@ const mysql = require("./Utils/Database2").pool;
 
 /*Middleware function to use request.body */
 app.use(express.json());
-
+app.use(cors());
 //Routes
 const admin = require("./Routes/Admin");
 const Group = require("./Routes/Group");
