@@ -36,7 +36,12 @@
    outline: none;
   
 }
-
+.innerLogin button:hover{
+    cursor: pointer;
+}
+.innerLogin input:hover{
+    cursor: pointer;
+}
 .innerLogin button{
     border: none;
     outline: none;

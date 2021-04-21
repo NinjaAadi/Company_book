@@ -37,7 +37,12 @@
    border: none;
    outline: none;
 }
-
+.innerSignup button:hover{
+    cursor: pointer;
+}
+.innerSignup input:hover{
+    cursor: pointer;
+}
 .innerSignup button{
     border: none;
     outline: none;

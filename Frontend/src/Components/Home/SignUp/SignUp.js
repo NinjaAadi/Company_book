@@ -1,24 +1,23 @@
-import React ,{useState} from 'react'
+import React ,{ useState} from 'react'
 import classes from './Signup.module.css';
+import axios from 'axios';
 const SignUp = () => {
     const [name,setName]=useState("");
     const [email,setEmail]=useState("");
     const [password,setPassword]=useState("");
+    const [adminPassword,setAdminPassword]=useState("");
+    
 
-    async function Signup (){
-            let item={name,password,email};
-            console.warn(item);
-           let result= await fetch("http://localhost:5000/api/v1/users/register",{
-                method:'POST',
-                body:JSON.stringify(item),
-                header:{
-                    "Content-Type":'application/json',
-                    "Accept":'application/json'
-                }
-            });
-            result = await result.json();
-            console.warn("result",result);
+    function signUpData() {
+      //    axios.get('http://localhost:5000/api/v1/users/login')
+      axios
+        .post("http://localhost:5000/api/v1/users/register")
+        .then((res) => console.log(res))
+        .catch((err) => console.error(err));
     }
+
+ 
+
     return (
       <>
         <div className={classes.signup}>
@@ -41,12 +40,17 @@ const SignUp = () => {
               onChange={(e) => setPassword(e.target.value)}
               placeholder="Password"
             />
-
-            <button onClick={Signup}>SignUp</button>
+            <input
+              type="password"
+              value={adminPassword}
+              onChange={(e) => setAdminPassword(e.target.value)}
+              placeholder="Admin Password"
+            />
+            <button onClick={signUpData}>SignUp</button>
           </div>
         </div>
       </>
     );
 }
 
-export default SignUp
+export default SignUp;
