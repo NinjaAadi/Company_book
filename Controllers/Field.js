@@ -119,7 +119,7 @@ exports.deletefield = async (req, res, next) => {
       if (err) {
         throw err;
       }
-      const field_name = req.body.field_id;
+      const field_name = req.body.field_name;
       let query =
         "DELETE FROM C_FIELDS WHERE NAME = " + "'" + field_name + "';";
       conn.query(query, function (err, rows) {

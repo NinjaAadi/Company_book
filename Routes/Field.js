@@ -9,7 +9,7 @@ const {
 const router = express.Router();
 
 router.route("/field/createfield").post(validator, createfield);
-router.route("/field/deletefield").delete(validator, deletefield);
+router.route("/field/deletefield").post(validator, deletefield);
 router.route("/field/editfield").post(validator, editfields);
 router.route("/field/getallfields").post(validator, getallfields);
 
