@@ -31,7 +31,6 @@
   color: white;
   margin-left: 5px;
   cursor: pointer;
-  box-shadow: 0 4px #999;
 }
 .occ {
   padding: 10px;
@@ -41,11 +40,10 @@
   border: 2px solid #00af91;
   margin-left: 5px;
   cursor: pointer;
-  box-shadow: 0 4px #999;
+
 }
 .search-3 {
   border: none;
-  box-shadow: 0 4px #999;
   padding: 10px;
   border: none;
   background-color: #00af91;

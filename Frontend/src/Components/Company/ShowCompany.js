@@ -2,15 +2,19 @@ import React, { Fragment, useEffect, useState } from "react";
 import { connect } from "react-redux";
 import classes from "./Showcompany.module.css";
 import PropTypes from "prop-types";
+import { useHistory } from "react-router-dom";
 //Import actions
 import getallcompanies from "../../Actions/Company/Getallcompanies";
 import getfirstnamecomp from "../../Actions/Company/GetFirstnameComp";
+import { getgroups } from "../../Actions/Getgroups";
+import { getfields } from "../../Actions/Getfields";
 import getallcomp from "../../Actions/Company/GetAllComp";
 
 //Import components to be shown
 import Showallcompany from "./ShowAllCompanies/Showallcompany";
 
 const ShowCompany = (props) => {
+  const history = useHistory();
   const [color, setcolor] = useState({
     c1: "red",
     c2: "#00af91",
@@ -64,6 +68,8 @@ const ShowCompany = (props) => {
   useEffect(() => {
     async function getallcompp() {
       await props.getallcompanies();
+      await props.getfields();
+      await props.getgroups();
     }
     getallcompp();
   }, []);
@@ -103,6 +109,13 @@ const ShowCompany = (props) => {
           <button className={classes["search-3"]} onClick={(e) => showall(e)}>
             Show All Companies
           </button>
+          <button
+            className={classes["search-3"]}
+            style={{ marginTop: "20px", marginLeft: "0px" }}
+            onClick={(e) => history.push("/groupsearch")}
+          >
+            <i className="fas fa-search"></i> Search based in groups
+          </button>
         </div>
         <Showallcompany />
       </div>
@@ -113,7 +126,13 @@ ShowCompany.propType = {
   getallcompanies: PropTypes.func.isRequired,
   getfirstnamecomp: PropTypes.func.isRequired,
   getallcomp: PropTypes.func.isRequired,
+  getgroups: PropTypes.func.isRequired,
+  getfields: PropTypes.func.isRequired,
 };
-export default connect(null, { getallcompanies, getfirstnamecomp, getallcomp })(
-  ShowCompany
-);
+export default connect(null, {
+  getallcompanies,
+  getfirstnamecomp,
+  getallcomp,
+  getgroups,
+  getfields,
+})(ShowCompany);

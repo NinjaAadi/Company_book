@@ -12,6 +12,8 @@ import ShowCompany from "./Components/Company/ShowCompany";
 import ShowPComp from "./Components/Company/ShowAllCompanies/ShowParticularCompany/ShowPComp";
 import CompanyForm from "./Components/Company/CompanyForm/CompanyForm";
 import EditCompany from "./Components/Company/EditCompany/EditCompany";
+import Showpersonlist from "./Components/Company/ShowAllCompanies/ShowParticularCompany/ShowPersonList/Showpersonlist";
+import Groupsearch from "./Components/Company/Groupsearch/Groupsearch";
 const App = () => {
   return (
     <Provider store={Store}>
@@ -22,6 +24,7 @@ const App = () => {
           <Route exact path="/modules" component={Module} />
           <Route exact path="/groups" component={Group} />
           <Route exact path="/companies" component={ShowCompany} />
+          <Route exact path="/groupsearch" component={Groupsearch} />
           <Route
             exact
             path="/particularcompany"
@@ -33,6 +36,7 @@ const App = () => {
             render={(props) => <EditCompany {...props} />}
           />
           <Route exact path="/createcompany" component={CompanyForm} />
+          <Route exact path="/company/personlist" component={Showpersonlist} />
         </Fragment>
       </BrowserRouter>
     </Provider>

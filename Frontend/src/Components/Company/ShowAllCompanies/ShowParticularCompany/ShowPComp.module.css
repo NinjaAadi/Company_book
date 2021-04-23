@@ -90,5 +90,34 @@
   color: black;
   border: none;
   cursor: pointer;
-  padding: 10px
+  padding: 10px;
+}
+.buttons {
+  width: 80%;
+  height: 5vh;
+  margin: auto;
+  margin-top: 5vh;
+  margin-bottom: 10vh;
+}
+.btn {
+  padding: 15px;
+  color: white;
+  background-color: #00af91;
+  border: none;
+  cursor: pointer;
+}
+.form {
+  width: 80%;
+  margin: auto;
+  margin-bottom: 10vh;
+}
+.input {
+  width: 60%;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid grey;
+  outline: none;
+}
+.input:focus {
+  border: 1px solid #00af91;
 }

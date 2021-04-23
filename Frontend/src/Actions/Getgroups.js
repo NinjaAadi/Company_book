@@ -23,7 +23,8 @@ export const getgroups = () => async (dispatch) => {
   const endpoint = host + "/api/v1/groups/getallgroups";
 
   const groups = await axios.post(endpoint, data, config);
-
+  localStorage.removeItem("allgroups");
+  localStorage.setItem("allgroups", JSON.stringify(groups.data.rows));
   //Dispatch the data into the store
   dispatch({
     type: SET_GROUPS,

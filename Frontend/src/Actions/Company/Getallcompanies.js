@@ -23,6 +23,8 @@ const getallcompanies = () => async (dispatch) => {
       password,
     };
     const res = await axios.post(endpoint, data, config);
+    localStorage.removeItem("allcompany");
+    localStorage.setItem("allcompany", JSON.stringify(res.data.c_data));
     dispatch({
       type: GET_ALL_COMPANIES,
       data: res.data.c_data,

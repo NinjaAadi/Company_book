@@ -1,0 +1,68 @@
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300&display=swap");
+.body {
+  width: 80%;
+  margin: auto;
+  margin-top: 15vh;
+  font-family: "Source Sans Pro", sans-serif !important;
+}
+.flex {
+  width: 75%;
+  margin: auto;
+  display: flex;
+  justify-content: left;
+  height: auto;
+  flex-wrap: wrap;
+  margin-top: 0px;
+  border: 1px dotted #ccc;
+  color: black;
+  padding: 20px;
+}
+.label {
+  margin-left: 20px;
+}
+.item {
+  margin-top: 15px;
+}
+.head {
+  margin: auto;
+  width: 80%;
+  color: #007965;
+}
+.btn {
+  padding: 10px;
+  color: white;
+  background-color: #00af91;
+  cursor: pointer;
+  border: none;
+  margin-top: 20px;
+}
+.head-1 {
+  margin: auto;
+  width: 85%;
+  overflow-x: scroll;
+  margin-top: 10vh;
+  margin-bottom: 10vh;
+}
+.table {
+  border-collapse: collapse;
+  margin: auto;
+}
+.tr-1 {
+  background-color: #f58634;
+  color: white;
+}
+.td {
+  padding: 15px;
+  font-size: 1.2rem;
+  text-align: left;
+}
+.th {
+  padding: 10px;
+  font-size: 1.2rem;
+  text-align: left;
+}
+.center {
+  text-align: center;
+  color: grey;
+}

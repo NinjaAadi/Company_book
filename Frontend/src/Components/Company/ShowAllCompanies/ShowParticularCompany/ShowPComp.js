@@ -11,17 +11,31 @@ import { useHistory } from "react-router";
 import { withRouter, Link } from "react-router-dom";
 //import deletepopup component
 import DeletePopup from "../../../DeletePop/DeletePopup";
-
+import createperson from "../../../../Utils/Createperson";
 //import the delete function
 import deletecompany from "../../../../Utils/DeleteCompany";
 
 //need to call all fields,modules and groups.... from server in useeffect
 
 const ShowPComp = (props) => {
-  const [res, setres] = useState({});
   const [toggler, settoggler] = useState(false);
   const [id, setid] = useState();
   const history = useHistory();
+
+  //First set the details in localstorage
+  let company;
+
+  if (props.location.company !== undefined) {
+    //get the company from props
+    company = props.location.company;
+    const res = JSON.stringify(props.location.company);
+    localStorage.setItem("comp", res);
+  } else {
+    const comp = localStorage.getItem("comp");
+
+    company = JSON.parse(comp);
+  }
+
   /*------------------------Toggler 1--------------------- */
   const toggle = () => {
     if (toggler == false) {
@@ -36,6 +50,41 @@ const ShowPComp = (props) => {
   const setidtodelete = (e, id) => {
     setid(id);
     toggle();
+  };
+  const [res, setres] = useState({
+    C_ID: company["C_ID"],
+    NAME: "",
+    EMAIL: "",
+    MOBILE: "",
+    DESIGNATION: "",
+  });
+  const [errmsg, seterrmsg] = useState();
+  //Set the person field object for creating a new object
+  const setpersonfield = (e) => {
+    setres({ ...res, [e.target.name]: e.target.value });
+  };
+
+  //Function when user creates a person
+  const createper = async (e) => {
+    //console.log(res);
+    const result = await createperson(res);
+    if (result === false) {
+      seterrmsg(
+        <p style={{ color: "red" }}>Error in inserting person's record</p>
+      );
+      setTimeout(() => {
+        seterrmsg("");
+      }, 2000);
+    } else {
+      seterrmsg(
+        <p style={{ color: "green" }}>
+          Successfully inserted a new person's record
+        </p>
+      );
+      setTimeout(() => {
+        seterrmsg("");
+      }, 2000);
+    }
   };
   useEffect(() => {
     async function fetchall() {
@@ -61,21 +110,6 @@ const ShowPComp = (props) => {
 
   //get the fields
   const fields = props.fields.c_fields;
-
-  //First set the details in localstorage
-  let company;
-  console.log(props.location.company);
-  if (props.location.company !== undefined) {
-    //get the company from props
-    company = props.location.company;
-    const res = JSON.stringify(props.location.company);
-    localStorage.setItem("comp", res);
-  } else {
-    const comp = localStorage.getItem("comp");
-    
-    company = JSON.parse(comp);
-    console.log(company);
-  }
 
   //map the company groups and fields
 
@@ -223,6 +257,58 @@ const ShowPComp = (props) => {
           );
         })}
       </table>
+      <div className={classes["buttons"]}>
+        <button
+          className={classes["btn"]}
+          onClick={(e) => {
+            history.push("/company/personlist");
+          }}
+        >
+          Click here to view registered people{" "}
+          <i class="fas fa-user-friends"></i>
+        </button>
+      </div>
+      <div className={classes["form"]}>
+        <h2>Insert a person's record in {company.C_NAME}</h2>
+        <br />
+        <hr />
+        <p>Name:</p>
+        <input
+          name="NAME"
+          className={classes["input"]}
+          type="text"
+          onChange={(e) => setpersonfield(e)}
+        />
+        <p>Email:</p>
+        <input
+          name="EMAIL"
+          className={classes["input"]}
+          type="text"
+          onChange={(e) => setpersonfield(e)}
+        />
+        <p>Mobile:</p>
+        <input
+          name="MOBILE"
+          className={classes["input"]}
+          type="text"
+          onChange={(e) => setpersonfield(e)}
+        />
+        <p>Designation:</p>
+        <input
+          name="DESIGNATION"
+          className={classes["input"]}
+          type="text"
+          onChange={(e) => setpersonfield(e)}
+        />
+        {errmsg}
+        <button
+          onClick={(e) => createper(e)}
+          className={classes["btn"]}
+          style={{ display: "block", marginTop: "20px" }}
+        >
+          Create <i class="fas fa-pen"></i>
+        </button>
+      </div>
     </div>
   );
 };
