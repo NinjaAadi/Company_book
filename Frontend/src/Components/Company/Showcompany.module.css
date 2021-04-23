@@ -1,0 +1,61 @@
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300&display=swap");
+.body {
+  padding: 10px;
+  width: 80%;
+  margin-top: 10vh;
+  margin-left: auto;
+  margin-right: auto;
+  position: relative;
+  height: auto;
+  z-index: 16;
+}
+.h1 {
+  font-size: 2rem;
+  font-family: "Open Sans", sans-serif !important;
+}
+.search {
+  width: 100%;
+  height: auto;
+  margin-bottom: 20px;
+}
+.input {
+  width: 60%;
+  height: 80%;
+  padding: 10px;
+}
+.search-2 {
+  padding: 10px;
+  border: none;
+  background-color: #00af91;
+  color: white;
+  margin-left: 5px;
+  cursor: pointer;
+  box-shadow: 0 4px #999;
+}
+.occ {
+  padding: 10px;
+  border: none;
+  background-color: #00af91;
+  color: white;
+  border: 2px solid #00af91;
+  margin-left: 5px;
+  cursor: pointer;
+  box-shadow: 0 4px #999;
+}
+.search-3 {
+  border: none;
+  box-shadow: 0 4px #999;
+  padding: 10px;
+  border: none;
+  background-color: #00af91;
+  color: white;
+  margin-left: 5px;
+  cursor: pointer;
+}
+.search-3:active,
+.search-2:active,
+.occ:active {
+  box-shadow: 0 0px #666;
+  transform: translateY(4px);
+}

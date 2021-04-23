@@ -9,8 +9,8 @@ const {
 } = require("../Controllers/Module");
 
 router.route("/module/createmodule").post(validator, createmodule);
-router.route("/module/deletemodule").delete(validator, deletemodule);
+router.route("/module/deletemodule").post(validator, deletemodule);
 router.route("/module/editmodule").post(validator, editmodule);
-router.route("/module/getallmodules").get(validator, getallmodule);
+router.route("/module/getallmodules").post(validator, getallmodule);
 
 module.exports = router;

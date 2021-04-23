@@ -21,8 +21,16 @@ exports.createcompany = async (req, res, next) => {
       let query2 = "VALUES (";
 
       let n = values.length;
-      for (var i = 2; i < n - 2; i++) {
+      for (var i = 0; i < n; i++) {
         const key = name[i];
+        if (
+          key == "C_G_ID" ||
+          key == "C_M_ID" ||
+          key == "email" ||
+          key == "password"
+        ) {
+          continue;
+        }
         const value = values[i];
         query1 += key + ",";
         query2 += "'" + value + "',";
@@ -45,6 +53,7 @@ exports.createcompany = async (req, res, next) => {
       });
 
       function awaiting() {
+        console.log(group.length, module.length);
         let values = [];
         //Insert into the link table for groups
         for (var i = 0; i < group.length; i++) {
@@ -331,9 +340,17 @@ exports.editcompany = async (req, res, next) => {
         const name = Object.keys(queryobj);
         const value = Object.values(queryobj);
         let n = value.length;
-        for (var i = 3; i < n - 2; i++) {
+        for (var i = 0; i < n; i++) {
           const K = name[i];
           const V = value[i];
+          if (
+            K == "C_G_ID" ||
+            K == "C_M_ID" ||
+            K == "email" ||
+            K == "password"
+          ) {
+            continue;
+          }
           query += K + "=" + "'" + V + "',";
         }
         query = query.slice(0, query.length - 1);

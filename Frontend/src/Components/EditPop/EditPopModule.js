@@ -1,8 +1,11 @@
 import React, { useState } from "react";
 import classes from "./EditPop.module.css";
+import { connect } from "react-redux";
+import PropTypes from "prop-types";
 const EditPop = (props) => {
   const toggler = props.toggler;
   const execfunc = props.mainfunc;
+  const id = props.id;
   const oldname = props.oldname;
   const [newname, setname] = useState(oldname);
   const [msg, setmsg] = useState("");
@@ -13,7 +16,18 @@ const EditPop = (props) => {
 
   //Run the executable function
   const onSubmit = async (e) => {
-    const res = await execfunc(oldname, newname);
+    const modules = props.modules;
+    let isvalid = true;
+    modules.map((f) => {
+      if (f.M_NAME == newname) {
+        isvalid = false;
+      }
+    });
+    if (isvalid === false) {
+      setmsg("Name already exists!");
+      return;
+    }
+    const res = await execfunc(id, newname);
     if (res === false) {
       setmsg("Please enter a valid name!");
       setInterval(() => {
@@ -45,5 +59,10 @@ const EditPop = (props) => {
     </div>
   );
 };
-
-export default EditPop;
+EditPop.propTypes = {
+  modules: PropTypes.object.isRequired,
+};
+const mapStateToProps = (state) => ({
+  modules: state.Module.c_modules,
+});
+export default connect(mapStateToProps, {})(EditPop);

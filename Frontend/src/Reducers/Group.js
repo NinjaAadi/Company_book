@@ -1,15 +1,15 @@
-import { SET_FIELDS } from "../Actiontype";
+import { SET_GROUPS } from "../Actiontype";
 const initialstate = {
-  c_fields: "",
+  c_groups: "",
   isfetched: false,
 };
 
-function fieldreducer(state = initialstate, action) {
+function groupreducer(state = initialstate, action) {
   const { type, data } = action;
   switch (type) {
-    case SET_FIELDS: {
+    case SET_GROUPS: {
       return {
-        c_fields: data,
+        c_groups: data,
         isfetched: true,
       };
     }
@@ -17,4 +17,4 @@ function fieldreducer(state = initialstate, action) {
       return state;
   }
 }
-export default fieldreducer;
+export default groupreducer;

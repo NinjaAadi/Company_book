@@ -1,0 +1,94 @@
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300&display=swap");
+.body {
+  width: 80%;
+  margin: auto;
+  margin-top: 10vh;
+  font-family: "Source Sans Pro", sans-serif !important;
+}
+.head {
+  background-color: #00af91;
+  color: white;
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+  padding-top: 20px;
+  width: 50%;
+  padding-bottom: 20px;
+  text-align: center;
+  margin: auto;
+}
+.module {
+  width: 80%;
+  margin: auto;
+  height: auto;
+  font-family: "Source Sans Pro", sans-serif !important;
+}
+.flex {
+  height: auto;
+  display: flex;
+  flex-wrap: wrap;
+}
+.p {
+  margin-right: 20px;
+  background-color: #f8f5f1;
+  padding: 5px;
+  color: black;
+  border-radius: 5px;
+}
+.table {
+  margin-top: 5vh;
+  position: relative;
+  margin-left: auto;
+  margin-right: auto;
+  width: 80%;
+  white-space: wrap;
+  overflow: auto;
+  border-collapse: collapse;
+}
+.th {
+  text-align: left;
+  background-color: #f58634;
+  width: 50%;
+  color: white;
+  padding: 10px;
+}
+.th-1 {
+  text-align: right;
+  background-color: #f58634;
+  width: 50%;
+  color: white;
+  padding: 10px;
+}
+.tr {
+  border-bottom: 0.5px dotted grey;
+  padding: 10px;
+}
+.td {
+  font-size: 1.3rem;
+  cursor: pointer;
+  text-align: left;
+  padding: 8px;
+}
+.td-1 {
+  text-align: right;
+  font-size: 1.3rem;
+}
+.deledit {
+  display: flex;
+  width: 80%;
+  margin: auto;
+  height: 5vh;
+  justify-content: space-between;
+}
+.delete {
+  background-color: red;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+.edit {
+  background-color: #ffcc29;
+  color: black;
+  border: none;
+  cursor: pointer;
+  padding: 10px
+}

@@ -2,27 +2,27 @@ import React, { Fragment, useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { useHistory } from "react-router-dom";
-import classes from "./Field.module.css";
+import classes from "./Module.module.css";
 import DeletePopup from "../DeletePop/DeletePopup";
-import EditPopup from "../EditPop/EditPopField";
+import EditPopup from "../EditPop/EditPopModule";
 //Import action files
-import { getfields } from "../../Actions/Getfields";
+import { getmodules } from "../../Actions/GetAllModules";
 
 //util to create new field
-import createfield from "../../Utils/CreateField";
-import deletefield from "../../Utils/DeleteField";
-import editfield from "../../Utils/EditField";
-const Field = (props) => {
+import createmodule from "../../Utils/CreateModule";
+import deletemodule from "../../Utils/DeleteModule";
+import editmodule from "../../Utils/EditModule";
+const Module = (props) => {
   const history = useHistory();
 
-  const [fname, setfname] = useState("");
+  const [m_name, setmmane] = useState("");
   const [message, setmessage] = useState("");
   const [toggler, settoggler] = useState(false);
   const [toggler2, settoggler2] = useState(false);
-  const [name, setnamedelete] = useState();
-  const [name2, setnamedelete2] = useState();
+  const [id, setid] = useState();
+  const [name2, setnametoedit] = useState();
   const onchange = (e) => {
-    setfname(e.target.value);
+    setmmane(e.target.value);
   };
   /*------------------------Toggler 1--------------------- */
   const toggle = () => {
@@ -35,8 +35,8 @@ const Field = (props) => {
   const close = () => {
     settoggler(false);
   };
-  const setnametodelete = (e, name) => {
-    setnamedelete(name);
+  const setidtodelete = (e, id) => {
+    setid(id);
     toggle();
   };
   /*------------------------Toggler 2--------------------- */
@@ -50,32 +50,33 @@ const Field = (props) => {
   const close2 = () => {
     settoggler2(false);
   };
-  const setnametoedit2 = (e, oldname) => {
-    setnamedelete2(oldname);
+  const setnametoedit2 = (e, oldname, id) => {
+    setnametoedit(oldname);
+    setid(id);
     toggle2();
   };
   /* ------------------------------------------------------*/
-  const fieldname = fname;
+  const groupname = m_name;
 
   //Function to create field
-  const create_field = async (e) => {
+  const create_module = async (e) => {
     e.preventDefault();
-    const ans = await createfield(fname);
+    const ans = await createmodule(m_name);
     if (ans) {
       setmessage(
-        <p style={{ color: "green" }}>Field registered successfully</p>
+        <p style={{ color: "green" }}>Module registered successfully</p>
       );
-      setfname("");
-      async function fetchfield() {
-        await props.getfields();
+      setmmane("");
+      async function fetchmodules() {
+        await props.getmodules();
       }
-      fetchfield();
+      fetchmodules();
       setTimeout(() => {
         setmessage("");
       }, 2000);
     } else {
       setmessage(
-        <p style={{ color: "red" }}>Oops! Field cannot be registered</p>
+        <p style={{ color: "red" }}>Oops! Module cannot be registered</p>
       );
       setTimeout(() => {
         setmessage("");
@@ -84,31 +85,36 @@ const Field = (props) => {
   };
 
   useEffect(() => {
-    async function fetchfield() {
-      await props.getfields();
+    async function fetchmodules() {
+      await props.getmodules();
     }
-    fetchfield();
+    fetchmodules();
   }, [toggler, toggler2]);
 
-  if (props.fields.isfetched === false) {
+  if (props.modules.isfetched === false) {
     return <div>Not Fetcheds</div>;
   } else {
     return (
       <Fragment>
         {toggler == true ? (
-          <DeletePopup p_value={name} toggler={close} mainfunc={deletefield} />
+          <DeletePopup p_value={id} toggler={close} mainfunc={deletemodule} />
         ) : (
           <Fragment></Fragment>
         )}
         {toggler2 == true ? (
-          <EditPopup toggler={close2} oldname={name2} mainfunc={editfield} />
+          <EditPopup
+            toggler={close2}
+            oldname={name2}
+            id={id}
+            mainfunc={editmodule}
+          />
         ) : (
           <Fragment></Fragment>
         )}
 
         <div className={classes["body"]}>
           <div className={classes["head"]}>
-            <h1 className={classes["h1"]}>User Defined Fields</h1>
+            <h1 className={classes["h1"]}>User Defined Modules</h1>
           </div>
           <hr />
           <br />
@@ -116,14 +122,14 @@ const Field = (props) => {
           <div className={classes["form"]}>
             <input
               name="name"
-              value={fieldname}
+              value={groupname}
               onChange={(e) => onchange(e)}
               className={classes["name"]}
               type="text"
-              placeholder="Enter new field name"
+              placeholder="Enter new module name"
             />
             <button
-              onClick={(e) => create_field(e)}
+              onClick={(e) => create_module(e)}
               className={classes["btn-1"]}
             >
               <i class="fas fa-plus-square"></i> Create
@@ -141,31 +147,26 @@ const Field = (props) => {
               <th className={classes["th"]}> </th>
               <th className={classes["th"]}> </th>
             </tr>
-            {props.fields.c_fields.map((i) => {
-              if (i.ISORIGINAL === 0) {
-                return (
-                  <tr>
-                    <td className={classes["td"]}>{i.ID}</td>
-                    <td className={classes["td"]}>{i.NAME}</td>
-                    <td className={classes["td"]}>
-                      <i
-                        onClick={(e) => setnametodelete(e, i.NAME)}
-                        style={{ color: "red" }}
-                        class="fas fa-trash-alt"
-                      ></i>
-                    </td>
-                    <td
-                      style={{ color: "darkgreen" }}
-                      className={classes["td"]}
-                    >
-                      <i
-                        class="far fa-edit"
-                        onClick={(e) => setnametoedit2(e, i.NAME)}
-                      ></i>
-                    </td>
-                  </tr>
-                );
-              }
+            {props.modules.c_modules.map((i) => {
+              return (
+                <tr>
+                  <td className={classes["td"]}>{i.M_ID}</td>
+                  <td className={classes["td"]}>{i.M_NAME}</td>
+                  <td className={classes["td"]}>
+                    <i
+                      onClick={(e) => setidtodelete(e, i.M_ID)}
+                      style={{ color: "red" }}
+                      class="fas fa-trash-alt"
+                    ></i>
+                  </td>
+                  <td style={{ color: "darkgreen" }} className={classes["td"]}>
+                    <i
+                      class="far fa-edit"
+                      onClick={(e) => setnametoedit2(e, i.M_NAME, i.M_ID)}
+                    ></i>
+                  </td>
+                </tr>
+              );
             })}
           </table>
           <hr />
@@ -175,11 +176,11 @@ const Field = (props) => {
   }
 };
 
-Field.propType = {
-  getfields: PropTypes.func.isRequired,
+Module.propType = {
+  getmodules: PropTypes.func.isRequired,
   fields: PropTypes.object.isRequired,
 };
 const mapStateToProps = (state) => ({
-  fields: state.Field,
+  modules: state.Module,
 });
-export default connect(mapStateToProps, { getfields })(Field);
+export default connect(mapStateToProps, { getmodules })(Module);
