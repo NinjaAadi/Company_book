@@ -5,13 +5,12 @@ import { useHistory } from "react-router-dom";
 import classes from "./Field.module.css";
 import DeletePopup from "../DeletePop/DeletePopup";
 import EditPopup from "../EditPop/EditPop";
-//Import action files
 import { getfields } from "../../Actions/Getfields";
-
-//util to create new field
 import createfield from "../../Utils/CreateField";
 import deletefield from "../../Utils/DeleteField";
 import editfield from "../../Utils/EditField";
+
+
 const Field = (props) => {
   const history = useHistory();
 

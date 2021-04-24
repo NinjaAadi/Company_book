@@ -1,21 +1,33 @@
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap");
 .login{
     display: flex;
+    /* flex-direction: column; */
     justify-content: center;
     align-items: center;
-   width: 30vw;
+   width: 26vw;
    height: 55vh;
    margin: 5vw;
-   border-radius: 5px;
+   border-radius: 5px; 
    background-color: #f58634;
-   box-shadow:
-  0 2.8px 2.2px rgba(0, 0, 0, 0.034),
-  0 6.7px 5.3px rgba(0, 0, 0, 0.048),
-  0 12.5px 10px rgba(0, 0, 0, 0.06),
-  0 22.3px 17.9px rgba(0, 0, 0, 0.072),
-  0 41.8px 33.4px rgba(0, 0, 0, 0.086),
-  0 100px 80px rgba(0, 0, 0, 0.12)
+  
+   position: relative;
+    margin-top: 0px;
+     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+   font-family: "Open Sans", sans-serif;
 }
-
+.loginMessage{
+    width: 70%;
+    /* padding: 3px; */
+    /* background-color: white; */
+    /* color: red; */
+    position: absolute;
+    
+    bottom: 100%;
+    color: white;
+    font-weight: bold;
+     font-family: "Open Sans", sans-serif;
+    /* margin-bottom: 40px; */
+}
 .innerLogin{
     display: flex;
     flex-direction: column;
@@ -24,17 +36,23 @@
    text-align: center;
    width: 100%;
     padding:10%;
+    position: relative;
+    
 }
 .innerLogin input{
    border-radius: 2px;
    margin-bottom: 20px;
-   padding: 5px;
+   padding: 4px;
    padding-left: 20px;
    height: 30px;
-   width: 100%;
+   width: 90%;
    border: none;
    outline: none;
-  
+   color: #f58634;
+   font-family: "Open Sans", sans-serif;
+}
+.innerLogin ::placeholder{
+    font-family: "Open Sans", sans-serif;
 }
 .innerLogin button:hover{
     cursor: pointer;
@@ -42,23 +60,62 @@
 .innerLogin input:hover{
     cursor: pointer;
 }
-.innerLogin button{
+
+.icon{
+    position: absolute;
+    right:4vw;
+    bottom: 51%;
+    color: #f58634;
+}
+
+.icon:hover{
+    cursor: pointer;
+}
+
+.LoginButton{
     border: none;
     outline: none;
-    background-color: white;
     padding: 10px;
     height: 40px;
     padding-left: 20px;
-    width: 107%;
+    width: 97%;
     margin-top: 20px;
     border-radius: 2px;
+    background-color:#ffc288;
+     
+      color: white;
+       letter-spacing: 3px;
+        font-weight: bold;
+        font-family: "Open Sans", sans-serif;
 }
-
-@media only screen and (max-width: 800px){
+.LoginButton:hover{
+        background-color:#f8a488;
+        color: white;
+}
+@media only screen and (max-width: 1200px){
+        .login{
+            width: 30vw;
+        }
+}
+@media only screen and (max-width: 1000px){
     .login{
         width: 50vw;
         
     }
+    .icon{
+        right: 7vw;
+    }
 }
+
+@media only screen and (max-width: 653px){
+        .login{
+            width: 65vw;
+        }
+        .icon{
+            right: 10vw;
+        }
+}
+
+
   
 
