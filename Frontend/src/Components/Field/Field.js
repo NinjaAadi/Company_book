@@ -4,7 +4,8 @@ import { connect } from "react-redux";
 import { useHistory } from "react-router-dom";
 import classes from "./Field.module.css";
 import DeletePopup from "../DeletePop/DeletePopup";
-import EditPopup from "../EditPop/EditPop";
+import EditPopup from "../EditPop/EditPopField";
+//Import action files
 import { getfields } from "../../Actions/Getfields";
 import createfield from "../../Utils/CreateField";
 import deletefield from "../../Utils/DeleteField";

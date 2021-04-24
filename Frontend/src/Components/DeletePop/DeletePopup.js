@@ -1,6 +1,7 @@
 import React from "react";
 import classes from "./DeletePopup.module.css";
-import { useHistory } from "react-router-dom";
+
+import { useHistory } from "react-router";
 const DeletePopup = (props) => {
   const history = useHistory();
   const exefunc = props.mainfunc;
@@ -16,6 +17,9 @@ const DeletePopup = (props) => {
   const onsuccess = async (e) => {
     e.preventDefault();
     const res = await exefunc(p_value);
+    if (props.reroute) {
+      history.push(props.reroute);
+    }
     toggler();
   };
   return (

@@ -106,3 +106,28 @@ exports.editperson = async (req, res, next) => {
     console.log("Error in editing the records for a person", error);
   }
 };
+/*
+@desc : Get all persons for a particular company
+@routes : person/getallperson
+@access : private
+*/
+exports.getallperson = async (req, res) => {
+  try {
+    mysql.getConnection(function (err, conn) {
+      if (err) throw err;
+      const id = req.body.C_ID;
+      const query = "SELECT * FROM C_PERSON WHERE C_ID = " + id + ";";
+      conn.query(query, function (err, rows) {
+        if (err) {
+          throw err;
+        }
+        return res.status(200).json({
+          rows,
+        });
+      });
+    });
+  } catch (error) {
+    console.log("Error in fetching all the person for a particular company!");
+    console.log(error);
+  }
+};

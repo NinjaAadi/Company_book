@@ -12,13 +12,27 @@ exports.creategroup = async (req, res, next) => {
       if (err) {
         throw err;
       }
-      const query =
-        "INSERT INTO C_GROUP (G_NAME) VALUES ('" + req.body.g_name + "');";
-      conn.query(query, function (err, rows) {
-        if (err) {
-          throw err;
-        }
-        res.status(200).json({ rows });
+      let query =
+        "SELECT * FROM C_GROUP WHERE G_NAME = " + "'" + req.body.g_name + "';";
+      new Promise((resolve, reject) => {
+        conn.query(query, function (err, rows) {
+          if (err) throw err;
+          if (rows.length > 0) {
+            return res.status(400).json({
+              message: "User already exists",
+            });
+          }
+          resolve("Success");
+        });
+      }).then(() => {
+        query =
+          "INSERT INTO C_GROUP (G_NAME) VALUES ('" + req.body.g_name + "');";
+        conn.query(query, function (err, rows) {
+          if (err) {
+            throw err;
+          }
+          res.status(200).json({ rows });
+        });
       });
     });
   } catch (error) {
@@ -41,12 +55,12 @@ exports.deletegroup = async (req, res, next) => {
 
       //Delete from the link table first
       const tquery = "DELETE FROM G_LINK WHERE G_ID = (" + req.body.g_id + ");";
-      conn.query(tquery,function(err,rows){
-        if(err){
+      conn.query(tquery, function (err, rows) {
+        if (err) {
           throw err;
         }
       });
-      //Delete from the group table 
+      //Delete from the group table
       const query = "DELETE FROM C_GROUP WHERE G_ID = (" + req.body.g_id + ");";
       conn.query(query, function (err, rows) {
         if (err) {
@@ -105,7 +119,7 @@ exports.getallgroup = async (req, res, next) => {
         if (err) {
           throw err;
         }
-        res.status(200).json({ rows });
+        return res.status(200).json({ rows });
       });
     });
   } catch (error) {

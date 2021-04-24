@@ -1,0 +1,61 @@
+@import url("https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300&display=swap");
+.body {
+  width: 80%;
+  margin: auto;
+  margin-top: 20vh;
+  height: auto;
+  font-family: "Open Sans", sans-serif !important;
+}
+.p {
+  display: block;
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+}
+.input {
+  width: 60%;
+  padding: 15px;
+  border: none;
+  border: 0.5px solid #a9a9a9;
+  border-radius: 7px;
+  outline: none;
+}
+.submit {
+  display: block;
+  background-color: #00af91;
+  color: white;
+  padding: 10px;
+  font-size: 1.1rem;
+  border: none;
+  margin-top: 20px;
+  margin-bottom: 10vh;
+}
+.input:focus,
+.input-1:focus {
+  border: none;
+  border: 0.5px solid #00af91;
+}
+.sel {
+  padding: 5px;
+  width: 150px;
+  border: 0.5px solid #a9a9a9;
+  border-radius: 7px;
+}
+.date input {
+  font-family: "Open Sans", sans-serif !important;
+  border: none;
+  border: 0.5px solid #a9a9a9;
+  border-radius: 7px;
+  padding: 10px !important;
+}
+.input-1 {
+  width: 60%;
+  padding: 5px;
+  height: 20vh;
+  border: none;
+  border: 0.5px solid #a9a9a9;
+  border-radius: 7px;
+  outline: none;
+}
+.country {
+  width: 30%;
+}

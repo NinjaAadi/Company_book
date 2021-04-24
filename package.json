@@ -26,6 +26,6 @@
     "mongoose-dynamic-schemas": "^1.2.6",
     "mysql": "^2.18.1",
     "nodemon": "^2.0.7",
-    "validator": "^13.6.0"
+    "pretty-checkbox": "^3.0.3"
   }
 }

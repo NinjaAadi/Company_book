@@ -7,8 +7,8 @@ const {
   getfirstname,
   getallnames,
 } = require("../Controllers/Query");
-router.route("/query/groups").get(validator, getgroupedcompanies);
-router.route("/query/getcompanybasedonfirstname").get(validator, getfirstname);
-router.route("/query/getcompanybasedonname").get(validator, getallnames);
+router.route("/query/groups").post(validator, getgroupedcompanies);
+router.route("/query/getcompanybasedonfirstname").post(validator, getfirstname);
+router.route("/query/getcompanybasedonname").post(validator, getallnames);
 
 module.exports = router;

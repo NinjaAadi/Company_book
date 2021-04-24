@@ -14,7 +14,6 @@ function fieldreducer(state = initialstate, action) {
       };
     }
     default:
-      console.log(type);
       return state;
   }
 }
