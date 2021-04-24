@@ -1,2 +1,2 @@
-const dbpass = "aaditya123";
+const dbpass = "tanyarajpal123";
 export default dbpass;

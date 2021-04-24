@@ -1,4 +1,5 @@
 const { exec } = require("child_process");
+const { request } = require("http");
 
 /*
 @desc : Backup a database
@@ -48,9 +49,7 @@ exports.restore = async (req, res) => {
     if (!pass) {
       return res.status(400);
     }
-    if (pass != process.env.DBPASS) {
-      return res.status(400);
-    }
+  
     const ress = "cd backup;mysql -u root -p" + pass + " client < dbname.sql";
     console.log(ress);
     exec(ress, (error, stdout, stderr) => {

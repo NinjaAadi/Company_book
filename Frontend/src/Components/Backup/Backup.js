@@ -53,6 +53,7 @@ const Backup = () => {
        return;
      }
      const res = await axios.post(endpoint, data, config);
+     console.log(res);
      setmsg(<p style={{ color: "green" }}>Restore successfull</p>);
      setTimeout(() => {
        setmsg("");
