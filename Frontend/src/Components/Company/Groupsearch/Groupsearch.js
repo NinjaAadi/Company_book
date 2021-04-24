@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import classes from "./Groupsearch.module.css";
 import MultiSelect from "react-multiple-select-dropdown-lite";
 import "react-multiple-select-dropdown-lite/dist/index.css";
+import ReactHTMLTableToExcel from "react-html-table-to-excel";
 
 import getgroupedcompanies from "../../../Utils/Getgroupedcompanies";
 
@@ -95,7 +96,7 @@ const Groupsearch = (props) => {
           <h1 style={{ color: "grey" }}>Search/Import based on groups</h1>
         </div>
         <br />
-        <hr />
+        <hr style={{ width: "80%" }} />
         <br />
         <div className={classes["head"]}>
           <h3>Select Groups</h3>
@@ -119,6 +120,7 @@ const Groupsearch = (props) => {
               <div className={classes["item"]}>
                 <label className={classes["label"]}>{f.NAME}</label>
                 <input
+                  className={classes["round"]}
                   type="checkbox"
                   name={f.NAME}
                   onChange={(e) => select(e)}
@@ -133,11 +135,18 @@ const Groupsearch = (props) => {
           <button className={classes["btn"]} onClick={(e) => onsubmit(e)}>
             Search <i class="fas fa-search"></i>
           </button>
+          <ReactHTMLTableToExcel
+            className={classes["btn-1"]}
+            table="custom_search_table"
+            filename="companies"
+            sheet="xls"
+            buttonText="Export Exel"
+          />
         </div>
 
         <div className={classes["head-1"]}>
           <h2 className={classes["center"]}>Search Results</h2>
-          <table className={classes["table"]}>
+          <table className={classes["table"]} id="custom_search_table">
             <tr className={classes["tr-1"]}>
               {showfield.map((item) => {
                 return <th className={classes["th"]}>{item}</th>;
