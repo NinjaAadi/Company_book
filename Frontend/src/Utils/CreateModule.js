@@ -1,5 +1,6 @@
 import axios from "axios";
 import host from "../host";
+import { email, password } from "../auth";
 const createmodule = async (name) => {
   try {
     if (name.length == 0) {
@@ -11,8 +12,7 @@ const createmodule = async (name) => {
       },
     };
 
-    //To be fethched from localstorage
-    const email = "aaditya@gmail.com";
+
     const password = "123456";
     //Endpoint
     const endpoint = host + "/api/v1/module/createmodule";

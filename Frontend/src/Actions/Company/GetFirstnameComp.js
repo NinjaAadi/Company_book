@@ -5,7 +5,7 @@ import {
   GET_ALL_COMPANIES,
   CLEAR_COMP,
 } from "../../Actiontype";
-
+import { email, password } from "../../auth";
 //Function to fetch all the companies
 const getfirstnamecomp = (search_name) => async (dispatch) => {
   try {
@@ -19,8 +19,6 @@ const getfirstnamecomp = (search_name) => async (dispatch) => {
       },
     };
     //To be fetched from the localstorage
-    const email = "aaditya@gmail.com";
-    const password = "123456";
     let endpoint = host + "/api/v1/company/getallcompanies";
     let data = {
       email,

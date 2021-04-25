@@ -1,6 +1,6 @@
 import axios from "axios";
 import host from "../host";
-
+import { email, password } from "../auth";
 const getgroupedcompanies = async (g_string) => {
   try {
     const config = {
@@ -8,9 +8,7 @@ const getgroupedcompanies = async (g_string) => {
         "Content-Type": "application/json",
       },
     };
-    //To be fethched from localstorage
-    const email = "aaditya@gmail.com";
-    const password = "123456";
+
     //Endpoint
     const endpoint = host + "/api/v1/query/groups";
     const data = {

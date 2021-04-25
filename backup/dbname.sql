@@ -27,7 +27,7 @@ CREATE TABLE `C_FIELDS` (
   `NAME` varchar(255) DEFAULT NULL,
   `ISORIGINAL` int DEFAULT '1',
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=70 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=73 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -36,7 +36,7 @@ CREATE TABLE `C_FIELDS` (
 
 LOCK TABLES `C_FIELDS` WRITE;
 /*!40000 ALTER TABLE `C_FIELDS` DISABLE KEYS */;
-INSERT INTO `C_FIELDS` VALUES (1,'C_NAME',1),(2,'C_COUNTRY',1),(3,'C_PHONE_1',1),(4,'C_PHONE_2',1),(5,'C_TAX_NUMBER',1),(6,'C_CREATED_AT',1),(7,'C_ACTIVE',1),(11,'C_NOTES',1),(62,'Temp11',0),(63,'Temp3',0),(64,'Temp7',0),(69,'Temp16',0);
+INSERT INTO `C_FIELDS` VALUES (1,'C_NAME',1),(2,'C_COUNTRY',1),(3,'C_PHONE_1',1),(4,'C_PHONE_2',1),(5,'C_TAX_NUMBER',1),(6,'C_CREATED_AT',1),(7,'C_ACTIVE',1),(11,'C_NOTES',1),(62,'Temp11',0),(63,'Temp3',0),(64,'Temp7',0),(69,'Temp16',0),(71,'Temp19',0);
 /*!40000 ALTER TABLE `C_FIELDS` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -60,7 +60,7 @@ CREATE TABLE `C_GROUP` (
 
 LOCK TABLES `C_GROUP` WRITE;
 /*!40000 ALTER TABLE `C_GROUP` DISABLE KEYS */;
-INSERT INTO `C_GROUP` VALUES (5,'ACM'),(6,'temp_grp'),(17,'Temp_10'),(18,'temp_grp_2'),(19,'temp4'),(20,'temp5'),(21,'temp6');
+INSERT INTO `C_GROUP` VALUES (5,'ACM1'),(6,'temp_grp'),(17,'Temp_10'),(18,'temp_grp_2'),(19,'temp4'),(20,'temp5');
 /*!40000 ALTER TABLE `C_GROUP` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -75,7 +75,7 @@ CREATE TABLE `C_MODULE` (
   `M_ID` int NOT NULL AUTO_INCREMENT,
   `M_NAME` varchar(300) DEFAULT NULL,
   PRIMARY KEY (`M_ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -114,7 +114,6 @@ CREATE TABLE `C_PERSON` (
 
 LOCK TABLES `C_PERSON` WRITE;
 /*!40000 ALTER TABLE `C_PERSON` DISABLE KEYS */;
-INSERT INTO `C_PERSON` VALUES (6,44,'Myaadityapal','Software Developer','7903966014','abhijeet@gmail.com'),(7,44,'Aaditya Pal','Software Enginner','9854623589','aaditya@gmail.com'),(10,44,'Tanya Rajpal','Software Developer','+917903966014','aaditya7739008423@gmail.com');
 /*!40000 ALTER TABLE `C_PERSON` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -139,8 +138,9 @@ CREATE TABLE `COMPANY` (
   `Temp3` varchar(255) DEFAULT NULL,
   `Temp7` varchar(255) DEFAULT NULL,
   `Temp16` varchar(255) DEFAULT NULL,
+  `Temp19` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`C_ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=48 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=50 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -149,7 +149,7 @@ CREATE TABLE `COMPANY` (
 
 LOCK TABLES `COMPANY` WRITE;
 /*!40000 ALTER TABLE `COMPANY` DISABLE KEYS */;
-INSERT INTO `COMPANY` VALUES (44,'FINALTEST11','{\"value\":\"AU\",\"label\":\"Australia\"}','9856452135','9563256523','1111111111','1618425000000',1,'This is so awesome!','asdaasdfasdsadfasdfa','null','null',NULL),(46,'FINALTESTCOMP','{\"value\":\"PF\",\"label\":\"French Polynesia\"}','3344343233','3332233444343','33343344434344','Sat Apr 10 2021 20:46:04 GMT+0530 (India Standard Time)',1,'','','','',''),(47,'FINALTEST20','{\"value\":\"ET\",\"label\":\"Ethiopia\"}','','','','Fri Apr 08 2022 20:47:13 GMT+0530 (India Standard Time)',1,'','','','','');
+INSERT INTO `COMPANY` VALUES (47,'FINALTEST220','{\"value\":\"ET\",\"label\":\"Ethiopia\"}','','','','1649431033000',1,'','','','','','null'),(48,'FINALTEST25','{\"value\":\"AL\",\"label\":\"Albania\"}','','','','Fri Apr 02 2021 21:56:13 GMT+0530 (India Standard Time)',1,'','','','','',NULL),(49,'test234','\"\"','','','','Thu Apr 15 2021 23:05:20 GMT+0530 (India Standard Time)',1,'','','','','','');
 /*!40000 ALTER TABLE `COMPANY` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -169,7 +169,7 @@ CREATE TABLE `G_LINK` (
   KEY `G_ID` (`G_ID`),
   CONSTRAINT `g_link_ibfk_1` FOREIGN KEY (`C_ID`) REFERENCES `COMPANY` (`C_ID`),
   CONSTRAINT `g_link_ibfk_2` FOREIGN KEY (`G_ID`) REFERENCES `C_GROUP` (`G_ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=244 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=250 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -178,7 +178,7 @@ CREATE TABLE `G_LINK` (
 
 LOCK TABLES `G_LINK` WRITE;
 /*!40000 ALTER TABLE `G_LINK` DISABLE KEYS */;
-INSERT INTO `G_LINK` VALUES (234,44,5),(235,44,6),(236,44,17),(237,44,18),(238,44,19),(239,44,20),(240,44,21),(241,46,5),(242,46,21),(243,47,18);
+INSERT INTO `G_LINK` VALUES (245,48,5),(246,48,6),(248,47,18),(249,49,5);
 /*!40000 ALTER TABLE `G_LINK` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -198,7 +198,7 @@ CREATE TABLE `M_LINK` (
   KEY `M_ID` (`M_ID`),
   CONSTRAINT `m_link_ibfk_1` FOREIGN KEY (`C_ID`) REFERENCES `COMPANY` (`C_ID`),
   CONSTRAINT `m_link_ibfk_2` FOREIGN KEY (`M_ID`) REFERENCES `C_MODULE` (`M_ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=156 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=165 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -207,7 +207,7 @@ CREATE TABLE `M_LINK` (
 
 LOCK TABLES `M_LINK` WRITE;
 /*!40000 ALTER TABLE `M_LINK` DISABLE KEYS */;
-INSERT INTO `M_LINK` VALUES (149,44,4),(150,44,7),(151,44,8),(152,44,9),(153,46,9),(154,46,4),(155,47,8);
+INSERT INTO `M_LINK` VALUES (160,48,4),(161,48,7),(164,47,8);
 /*!40000 ALTER TABLE `M_LINK` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -220,4 +220,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-04-24 16:50:28
+-- Dump completed on 2021-04-24 23:06:06

@@ -1,5 +1,6 @@
 import axios from "axios";
 import host from "../host";
+import { email, password } from "../auth";
 const editfield = async (old_name, new_name) => {
   new_name = new_name.split(" ").join("");
   try {
@@ -12,9 +13,7 @@ const editfield = async (old_name, new_name) => {
       },
     };
 
-    //To be fethched from localstorage
-    const email = "aaditya@gmail.com";
-    const password = "123456";
+ 
     //Endpoint
     const endpoint = host + "/api/v1/field/editfield";
     const data = {

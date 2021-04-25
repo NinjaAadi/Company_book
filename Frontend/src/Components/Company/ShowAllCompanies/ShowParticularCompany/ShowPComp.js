@@ -14,7 +14,7 @@ import DeletePopup from "../../../DeletePop/DeletePopup";
 import createperson from "../../../../Utils/Createperson";
 //import the delete function
 import deletecompany from "../../../../Utils/DeleteCompany";
-
+import Spinner from "../../../Spinner/Spinner";
 //need to call all fields,modules and groups.... from server in useeffect
 
 const ShowPComp = (props) => {
@@ -99,7 +99,7 @@ const ShowPComp = (props) => {
     props.modules.isfetched === false ||
     props.fields.isfetched === false
   ) {
-    return <div>Not fetched</div>;
+    return <Spinner />;
   }
 
   //get the groups
@@ -175,7 +175,11 @@ const ShowPComp = (props) => {
   } else {
     clr = <i style={{ color: "red" }} class="fas fa-circle"></i>;
   }
-
+  const authemail = localStorage.getItem("email");
+  const authpass = localStorage.getItem("password");
+  if (authemail === null || authpass === null) {
+    history.push("/");
+  }
   return (
     <div className={classes["body"]}>
       {toggler == true ? (

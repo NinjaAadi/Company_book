@@ -7,7 +7,7 @@ import DeletePopup from "../DeletePop/DeletePopup";
 import EditPopup from "../EditPop/EditPopModule";
 //Import action files
 import { getmodules } from "../../Actions/GetAllModules";
-
+import Spinner from "../Spinner/Spinner";
 //util to create new field
 import createmodule from "../../Utils/CreateModule";
 import deletemodule from "../../Utils/DeleteModule";
@@ -83,7 +83,11 @@ const Module = (props) => {
       }, 2000);
     }
   };
-
+  const authemail = localStorage.getItem("email");
+  const authpass = localStorage.getItem("password");
+  if (authemail === null || authpass === null) {
+    history.push("/");
+  }
   useEffect(() => {
     async function fetchmodules() {
       await props.getmodules();
@@ -92,7 +96,7 @@ const Module = (props) => {
   }, [toggler, toggler2]);
 
   if (props.modules.isfetched === false) {
-    return <div>Not Fetcheds</div>;
+    return <Spinner />;
   } else {
     return (
       <Fragment>

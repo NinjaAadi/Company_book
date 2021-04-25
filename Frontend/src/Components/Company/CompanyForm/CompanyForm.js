@@ -8,7 +8,7 @@ import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import Select from "react-select";
 import countryList from "react-select-country-list";
-
+import Spinner from "../../Spinner/Spinner";
 //import the action files
 import { getgroups } from "../../../Actions/Getgroups";
 import { getmodules } from "../../../Actions/GetAllModules";
@@ -16,6 +16,7 @@ import { getfields } from "../../../Actions/Getfields";
 import getallcompanies from "../../../Actions/Company/Getallcompanies";
 //import from utils
 import createcompany from "../../../Utils/CreateCompany";
+import { useHistory } from "react-router";
 const CompanyForm = (props) => {
   //state for error message
   const [err, seterr] = useState("");
@@ -26,6 +27,12 @@ const CompanyForm = (props) => {
   const changecountry = (value) => {
     setcountry(value);
   };
+  const history = useHistory();
+  const authemail = localStorage.getItem("email");
+  const authpass = localStorage.getItem("password");
+  if (authemail === null || authpass === null) {
+    history.push("/");
+  }
   useEffect(() => {
     async function fetchall() {
       await props.getgroups();
@@ -56,7 +63,7 @@ const CompanyForm = (props) => {
     props.modules.isfetched === false ||
     props.fields.isfetched === false
   ) {
-    return <div>Not fetched</div>;
+    return <Spinner />;
   }
   //get the groups
   const allgroups = props.groups.c_groups;

@@ -6,8 +6,10 @@ import "react-multiple-select-dropdown-lite/dist/index.css";
 import ReactHTMLTableToExcel from "react-html-table-to-excel";
 
 import getgroupedcompanies from "../../../Utils/Getgroupedcompanies";
+import { useHistory } from "react-router";
 
 const Groupsearch = (props) => {
+  const history = useHistory();
   const [msg, setmsg] = useState("");
   const [fields, setfields] = useState({});
   const [groups, setgroups] = useState({});
@@ -15,6 +17,11 @@ const Groupsearch = (props) => {
   const [showfield, setshowfield] = useState([]);
   const [val, setval] = useState();
   const [companies, setcompanies] = useState([]);
+  const authemail = localStorage.getItem("email");
+  const authpass = localStorage.getItem("password");
+  if (authemail === null || authpass === null) {
+    history.push("/");
+  }
   useEffect(() => {
     const fields = JSON.parse(localStorage.getItem("allfields"));
     const obj = {};

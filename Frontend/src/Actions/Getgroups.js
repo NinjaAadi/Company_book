@@ -1,6 +1,7 @@
 import axios from "axios";
 import host from "../host";
-
+import { email, password } from "../auth";
+import { decryptData } from "../Utils/EncryptDecrypt";
 //import actions
 import { SET_GROUPS } from "../Actiontype";
 
@@ -13,8 +14,6 @@ export const getgroups = () => async (dispatch) => {
   };
 
   //To be fetched from localstorage
-  const email = "aaditya@gmail.com";
-  const password = "123456";
   const data = {
     email: email,
     password: password,

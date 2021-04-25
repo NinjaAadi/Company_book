@@ -1,0 +1,109 @@
+.signup {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 26vw;
+  height: 55vh;
+  margin: 5vw;
+  margin-top: 0px;
+  border-radius: 5px;
+  background-color: #f58634;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  font-family: "Open Sans", sans-serif;
+}
+.signupMessage {
+  width: 70%;
+  position: absolute;
+  bottom: 90%;
+  color: white;
+  margin-bottom: 15px;
+  font-weight: bold;
+  font-family: "Open Sans", sans-serif;
+}
+
+.innerSignup {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 10%;
+  width: 100%;
+  position: relative;
+}
+
+.innerSignup input {
+  border-radius: 2px;
+  margin-bottom: 20px;
+  padding: 4px;
+  padding-left: 20px;
+  height: 30px;
+  width: 90%;
+  border: none;
+  outline: none;
+  color: black;
+  font-family: "Open Sans", sans-serif;
+}
+
+.innerSignup::placeholder {
+  font-family: "Open Sans", sans-serif;
+}
+.innerSignup button:hover {
+  cursor: pointer;
+}
+.innerSignup input:hover {
+  cursor: pointer;
+}
+.icon {
+  position: absolute;
+  right: 4vw;
+  bottom: 49%;
+  color: #f58634;
+}
+.icon:hover {
+  cursor: pointer;
+}
+.SignupButton {
+  border: none;
+  outline: none;
+  background-color: #ffc288;
+  padding: 10px;
+  height: 40px;
+  padding-left: 20px;
+  width: 97%;
+  color: white;
+  margin-top: 5px;
+  border-radius: 2px;
+  letter-spacing: 2px;
+  font-weight: bold;
+  font-family: "Open Sans", sans-serif;
+}
+
+.SignupButton:hover {
+  background-color: #f8a488;
+  color: white;
+}
+
+@media only screen and (max-width: 1200px) {
+  .signup {
+    width: 30vw;
+  }
+}
+@media only screen and (max-width: 1000px) {
+  .signup {
+    width: 50vw;
+  }
+  .icon {
+    right: 7vw;
+  }
+}
+
+@media only screen and (max-width: 653px) {
+  .signup {
+    width: 65vw;
+  }
+  .icon {
+    right: 10vw;
+  }
+}

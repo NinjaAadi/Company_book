@@ -1,5 +1,6 @@
 import axios from "axios";
 import host from "../host";
+import { email, password } from "../auth";
 const createcompany = async (comp) => {
   try {
     const config = {
@@ -9,8 +10,6 @@ const createcompany = async (comp) => {
     };
 
     //To be fethched from localstorage
-    const email = "aaditya@gmail.com";
-    const password = "123456";
     //Endpoint
     const endpoint = host + "/api/v1/company/createcompany";
     const data = {

@@ -15,6 +15,7 @@ import Showallcompany from "./ShowAllCompanies/Showallcompany";
 
 const ShowCompany = (props) => {
   const history = useHistory();
+
   const [color, setcolor] = useState({
     c1: "red",
     c2: "#00af91",
@@ -46,7 +47,12 @@ const ShowCompany = (props) => {
       });
     }
   };
+  const authemail = localStorage.getItem("email");
+  const authpass = localStorage.getItem("password");
 
+  if (authemail === null || authpass === null) {
+    history.push("/");
+  }
   //Function to search
   const search = (e) => {
     querystr.trim();
@@ -65,6 +71,7 @@ const ShowCompany = (props) => {
       query();
     }
   };
+
   useEffect(() => {
     async function getallcompp() {
       await props.getallcompanies();
@@ -73,6 +80,7 @@ const ShowCompany = (props) => {
     }
     getallcompp();
   }, []);
+
   return (
     <Fragment>
       <div className={classes["body"]}>

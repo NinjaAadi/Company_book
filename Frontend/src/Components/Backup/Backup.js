@@ -3,6 +3,7 @@ import classes from "./Backup.module.css";
 import dbpass from "../../dbpass";
 import host from "../../host";
 import axios from "axios";
+import { useHistory } from "react-router";
 const Backup = () => {
   const [pass, setpass] = useState();
   const [msg, setmsg] = useState();
@@ -36,36 +37,43 @@ const Backup = () => {
       return;
     }
   };
- const onsubmit2 = async (e) => {
-   try {
-     const endpoint = host + "/api/v1/restore";
-     const data = { password: pass };
-     const config = {
-       headers: {
-         "Content-Type": "application/json",
-       },
-     };
-     if (pass === undefined || pass.length == 0 || pass != dbpass) {
-       setmsg(<p style={{ color: "red" }}>Error in restoration!</p>);
-       setTimeout(() => {
-         setmsg("");
-       }, 2000);
-       return;
-     }
-     const res = await axios.post(endpoint, data, config);
-     setmsg(<p style={{ color: "green" }}>Restore successfull</p>);
-     setTimeout(() => {
-       setmsg("");
-     }, 2000);
-     return;
-   } catch (error) {
-     setmsg(<p style={{ color: "red" }}>Error in restoration!</p>);
-     setTimeout(() => {
-       setmsg("");
-     }, 2000);
-     return;
-   }
- };
+  const onsubmit2 = async (e) => {
+    try {
+      const endpoint = host + "/api/v1/restore";
+      const data = { password: pass };
+      const config = {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      };
+      if (pass === undefined || pass.length == 0 || pass != dbpass) {
+        setmsg(<p style={{ color: "red" }}>Error in restoration!</p>);
+        setTimeout(() => {
+          setmsg("");
+        }, 2000);
+        return;
+      }
+      const res = await axios.post(endpoint, data, config);
+      console.log(res);
+      setmsg(<p style={{ color: "green" }}>Restore successfull</p>);
+      setTimeout(() => {
+        setmsg("");
+      }, 2000);
+      return;
+    } catch (error) {
+      setmsg(<p style={{ color: "red" }}>Error in restoration!</p>);
+      setTimeout(() => {
+        setmsg("");
+      }, 2000);
+      return;
+    }
+  };
+  const history = useHistory();
+  const authemail = localStorage.getItem("email");
+  const authpass = localStorage.getItem("password");
+  if (authemail === null || authpass === null) {
+    history.push("/");
+  }
   return (
     <div className={classes["body"]}>
       <div className={classes["head"]}>

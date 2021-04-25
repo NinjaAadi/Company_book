@@ -15,11 +15,14 @@ import EditCompany from "./Components/Company/EditCompany/EditCompany";
 import Showpersonlist from "./Components/Company/ShowAllCompanies/ShowParticularCompany/ShowPersonList/Showpersonlist";
 import Groupsearch from "./Components/Company/Groupsearch/Groupsearch";
 import Backup from "./Components/Backup/Backup";
+import Navbar from "./Components/Navbar/Navbar";
+
 const App = () => {
   return (
     <Provider store={Store}>
       <BrowserRouter>
         <Fragment>
+          <Navbar />
           <Route exact path="/" component={Home} />
           <Route exact path="/custom_fields" component={Field} />
           <Route exact path="/modules" component={Module} />

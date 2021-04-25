@@ -1,4 +1,5 @@
 import axios from "axios";
+import { email, password } from "../auth";
 import host from "../host";
 const editgroup = async (id, new_name) => {
   try {
@@ -11,9 +12,7 @@ const editgroup = async (id, new_name) => {
       },
     };
 
-    //To be fethched from localstorage
-    const email = "aaditya@gmail.com";
-    const password = "123456";
+
     //Endpoint
     const endpoint = host + "/api/v1/groups/editgroup";
     const data = {

@@ -1,5 +1,6 @@
 import axios from "axios";
 import host from "../host";
+import { email, password } from "../auth";
 const editperson = async (obj) => {
   try {
       if(obj["NAME"].length == 0){
@@ -11,9 +12,7 @@ const editperson = async (obj) => {
       },
     };
 
-    //To be fethched from localstorage
-    const email = "aaditya@gmail.com";
-    const password = "123456";
+
     //Endpoint
     const endpoint = host + "/api/v1/person/editperson";
     const data = {

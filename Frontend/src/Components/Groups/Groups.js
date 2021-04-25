@@ -7,7 +7,7 @@ import DeletePopup from "../DeletePop/DeletePopup";
 import EditPopup from "../EditPop/EditPopGroup";
 //Import action files
 import { getgroups } from "../../Actions/Getgroups";
-
+import Spinner from "../Spinner/Spinner";
 //util to create new field
 import creategroup from "../../Utils/CreateGroup";
 import deletegroup from "../../Utils/DeleteGroup";
@@ -83,7 +83,11 @@ const Group = (props) => {
       }, 2000);
     }
   };
-
+  const authemail = localStorage.getItem("email");
+  const authpass = localStorage.getItem("password");
+  if (authemail === null || authpass === null) {
+    history.push("/");
+  }
   useEffect(() => {
     async function fetchgroups() {
       await props.getgroups();
@@ -92,7 +96,7 @@ const Group = (props) => {
   }, [toggler, toggler2]);
 
   if (props.groups.isfetched === false) {
-    return <div>Not Fetcheds</div>;
+    return <Spinner />;
   } else {
     return (
       <Fragment>

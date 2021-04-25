@@ -8,11 +8,18 @@ import DeletePopup from "../../../../DeletePop/DeletePopup";
 
 //Import edit popup
 import Personedit from "./Personedit/Personedit";
+import { useHistory } from "react-router";
 const Showpersonlist = () => {
   let comp = JSON.parse(localStorage.getItem("comp"));
   const [person, setperson] = useState([]);
   const [toggler, settoggler] = useState(false);
   const [toggler2, settoggler2] = useState(false);
+  const history = useHistory();
+  const authemail = localStorage.getItem("email");
+  const authpass = localStorage.getItem("password");
+  if (authemail === null || authpass === null) {
+    history.push("/");
+  }
   useEffect(() => {
     async function getperson() {
       const persons = await getallperson(comp["C_ID"]);

@@ -2,31 +2,60 @@ import React, { Fragment } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import classes from "./Company.module.css";
-import { Redirect } from "react-router";
+import { Redirect, useHistory } from "react-router";
 import { withRouter, Link } from "react-router-dom";
+import Spinner from "../../Spinner/Spinner";
 const Showallcompany = (props) => {
+  const history = useHistory();
   if (props.company.isfetched === false) {
-    return <div>Not Fetched</div>;
+    return <Spinner />;
   }
+
+  const authemail = localStorage.getItem("email");
+  const authpass = localStorage.getItem("password");
+
+  if (authemail === null || authpass === null) {
+    history.push("/");
+  }
+  const fields = JSON.parse(localStorage.getItem("allfields"));
   return (
     <Fragment>
       <hr />
       <br />
-      <table className={classes["table"]}>
-        <tr>
-          <th className={classes["th"]}>C_ID</th>
-          <th className={classes["th"]}>
-            <b>C_NAME</b>
-          </th>
-          <th className={classes["th"]}></th>
-          <th className={classes["th"]}> </th>
-        </tr>
-        {props.company.querycompanies.map((c) => {
-          return (
-            <tr>
-              <td className={classes["td"]}>{c.C_ID}</td>
-              <td className={classes["td"]}>{c.C_NAME}</td>
-              <td className={classes["td"]}>
+      <div className={classes["resp"]}>
+        <table className={classes["table"]}>
+          <tr>
+            {fields.map((f) => {
+              return <th className={classes["th"]}>{f.NAME}</th>;
+            })}
+            <th className={classes["th"]}>Edit</th>
+          </tr>
+          {props.company.querycompanies.map((c) => {
+            return (
+              // <tr>
+              //   <td className={classes["td"]}>{c.C_ID}</td>
+              //   <td className={classes["td"]}>{c.C_NAME}</td>
+              //   <td className={classes["td"]}>
+
+              //   </td>
+              // </tr>
+              <tr>
+                {fields.map((f) => {
+                  if (f.NAME === "C_COUNTRY") {
+                    const datee = JSON.parse(c[f.NAME]);
+                    const output = datee["label"];
+                    return (
+                      <td style={{ width: "auto", padding: "10px" }}>
+                        {output}
+                      </td>
+                    );
+                  }
+                  return (
+                    <td style={{ width: "auto", padding: "10px" }}>
+                      {c[f.NAME]}
+                    </td>
+                  );
+                })}
                 <Link
                   to={{
                     pathname: "/particularcompany",
@@ -34,15 +63,19 @@ const Showallcompany = (props) => {
                   }}
                 >
                   <i
-                    style={{ color: "green", cursor: "pointer" }}
+                    style={{
+                      color: "green",
+                      cursor: "pointer",
+                      marginTop: "60%",
+                    }}
                     class="fas fa-eye"
                   ></i>
                 </Link>
-              </td>
-            </tr>
-          );
-        })}
-      </table>
+              </tr>
+            );
+          })}
+        </table>
+      </div>
     </Fragment>
   );
 };

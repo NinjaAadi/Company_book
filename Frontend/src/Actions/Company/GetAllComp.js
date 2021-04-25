@@ -1,5 +1,6 @@
 import axios from "axios";
 import host from "../../host";
+import { email, password } from "../../auth";
 import { SEARCH_ALL_COMP, GET_ALL_COMPANIES,CLEAR_COMP } from "../../Actiontype";
 
 //Function to fetch all the companies
@@ -14,9 +15,6 @@ const getallcomp = (search_name) => async (dispatch) => {
         "Content-Type": "application/json",
       },
     };
-    //To be fetched from the localstorage
-    const email = "aaditya@gmail.com";
-    const password = "123456";
     let endpoint = host + "/api/v1/company/getallcompanies";
     let data = {
       email,

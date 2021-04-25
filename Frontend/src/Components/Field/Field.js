@@ -7,11 +7,11 @@ import DeletePopup from "../DeletePop/DeletePopup";
 import EditPopup from "../EditPop/EditPopField";
 //Import action files
 import { getfields } from "../../Actions/Getfields";
-
-//util to create new field
 import createfield from "../../Utils/CreateField";
 import deletefield from "../../Utils/DeleteField";
 import editfield from "../../Utils/EditField";
+import Spinner from "../Spinner/Spinner";
+
 const Field = (props) => {
   const history = useHistory();
 
@@ -56,7 +56,11 @@ const Field = (props) => {
   };
   /* ------------------------------------------------------*/
   const fieldname = fname;
-
+  const authemail = localStorage.getItem("email");
+  const authpass = localStorage.getItem("password");
+  if (authemail === null || authpass === null) {
+    history.push("/");
+  }
   //Function to create field
   const create_field = async (e) => {
     e.preventDefault();
@@ -91,7 +95,7 @@ const Field = (props) => {
   }, [toggler, toggler2]);
 
   if (props.fields.isfetched === false) {
-    return <div>Not Fetcheds</div>;
+    return <Spinner />;
   } else {
     return (
       <Fragment>

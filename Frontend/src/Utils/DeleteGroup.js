@@ -1,5 +1,6 @@
 import axios from "axios";
 import host from "../host";
+import { email, password } from "../auth";
 const deletegroup = async (id) => {
   try {
     const config = {
@@ -8,9 +9,7 @@ const deletegroup = async (id) => {
       },
     };
 
-    //To be fethched from localstorage
-    const email = "aaditya@gmail.com";
-    const password = "123456";
+
     //Endpoint
     const endpoint = host + "/api/v1/groups/deletegroup";
     const data = {
