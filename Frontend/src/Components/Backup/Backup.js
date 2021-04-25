@@ -61,6 +61,7 @@ const Backup = () => {
       }, 2000);
       return;
     } catch (error) {
+      console.log(error);
       setmsg(<p style={{ color: "red" }}>Error in restoration!</p>);
       setTimeout(() => {
         setmsg("");
