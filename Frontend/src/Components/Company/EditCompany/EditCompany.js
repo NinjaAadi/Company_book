@@ -72,7 +72,11 @@ const EditCompany = (props) => {
       newobj[keyy] = value;
     }
     setprevobj(newobj);
-    setdate(Date.parse(company["C_CREATED_AT"]));
+    console.log(company["C_CREATED_AT"]);
+    console.log(Date.parse(company["C_CREATED_AT"]));
+    const nd = new Date(Date.parse(company["C_CREATED_AT"]));
+    console.log(nd);
+    setdate(nd);
     setcountry(JSON.parse(company["C_COUNTRY"]));
     console.log(newobj);
   }, []);
@@ -124,6 +128,7 @@ const EditCompany = (props) => {
   };
 
   const setdatemy = (date) => {
+    console.log(typeof date);
     setdate(date);
   };
 
@@ -252,6 +257,9 @@ const EditCompany = (props) => {
         <i style={{ color: "#f58634" }} class="fas fa-building"></i>
       </h1>
       <br />
+      <p style={{ color: "red" }}>
+        Edit the groups and modules at the end!
+      </p>
       <hr />
       <p className={classes["p"]}>
         Date{" "}

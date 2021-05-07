@@ -52,6 +52,7 @@ exports.createfield = async (req, res, next) => {
           message: "Field added successfully!",
         });
       });
+      conn.release();
     });
   } catch (error) {
     console.log("Error in creating fields", error);
@@ -98,7 +99,8 @@ exports.editfields = async (req, res, next) => {
           return err;
         }
       });
-      res.status(200).json({
+      conn.release();
+      return res.status(200).json({
         message: "Field edited successfully",
       });
     });
@@ -135,6 +137,7 @@ exports.deletefield = async (req, res, next) => {
           throw err;
         }
       });
+      conn.release();
       return res.status(200).json({
         message: "Field deleted successfully",
       });
@@ -162,6 +165,7 @@ exports.getallfields = async (req, res, next) => {
         }
         res.status(200).json({ rows });
       });
+      conn.release();
     });
   } catch (error) {
     console.log(error);

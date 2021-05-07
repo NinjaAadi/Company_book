@@ -20,6 +20,7 @@ exports.createmodule = async (req, res, next) => {
         }
         res.status(200).json({ rows });
       });
+      conn.release();
     });
   } catch (error) {
     console.log(error);
@@ -55,6 +56,7 @@ exports.deletemodule = async (req, res, next) => {
         }
         res.status(200).json({ rows });
       });
+      conn.release();
     });
   } catch (error) {
     console.log(error);
@@ -84,6 +86,7 @@ exports.editmodule = async (req, res, next) => {
         }
         res.status(200).json({ rows });
       });
+      conn.release();
     });
   } catch (error) {
     console.log(error);
@@ -108,6 +111,7 @@ exports.getallmodule = async (req, res, next) => {
         }
         res.status(200).json({ rows });
       });
+      conn.release();
     });
   } catch (error) {
     console.log(error);

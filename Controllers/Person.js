@@ -36,6 +36,7 @@ exports.createperson = async (req, res, next) => {
       res.status(200).json({
         message: "Person details inserted successfully!",
       });
+      conn.release();
     });
   } catch (error) {
     console.log("Error in inserting person");
@@ -57,6 +58,7 @@ exports.deleteperson = async (req, res, next) => {
           throw err;
         }
       });
+      conn.release();
       return res.status(200).json({
         message: "Deleted person's record successfully!",
       });
@@ -101,6 +103,7 @@ exports.editperson = async (req, res, next) => {
       res.status(200).json({
         message: "Person's record updated successfully",
       });
+      conn.release();
     });
   } catch (error) {
     console.log("Error in editing the records for a person", error);
@@ -125,6 +128,7 @@ exports.getallperson = async (req, res) => {
           rows,
         });
       });
+      conn.release();
     });
   } catch (error) {
     console.log("Error in fetching all the person for a particular company!");

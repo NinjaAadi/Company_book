@@ -33,6 +33,7 @@ exports.getgroupedcompanies = async (req, res, next) => {
           C_ID,
         });
       });
+      conn.release();
     });
   } catch (error) {
     console.log("Error in fetching companies...", error);
@@ -66,6 +67,7 @@ exports.getfirstname = async (req, res, next) => {
           c_id,
         });
       });
+      conn.release();
     });
   } catch (error) {
     console.log("Error in fetching company based on first name...", error);
@@ -99,6 +101,7 @@ exports.getallnames = async (req, res, next) => {
           c_id,
         });
       });
+      conn.release();
     });
   } catch (error) {
     console.log("Error in fetching company based on first name...", error);

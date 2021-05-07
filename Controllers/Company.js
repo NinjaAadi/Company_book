@@ -90,6 +90,7 @@ exports.createcompany = async (req, res, next) => {
           });
         }
       }
+      conn.release();
     });
 
     return res.status(200).json({
@@ -143,6 +144,7 @@ exports.deletecompany = async (req, res, next) => {
       res.status(200).json({
         message: "Company deleted successfully!",
       });
+      conn.release();
     });
   } catch (error) {
     console.log("Error in deleting company", error);
@@ -167,7 +169,12 @@ exports.getallcompanies = async (req, res, next) => {
           throw err;
         }
         c_data = rows;
-
+        console.log(c_data.length);
+        if (c_data.length == 0) {
+          return res.status(200).json({
+            c_data: [],
+          });
+        }
         //Call the promise function
         createpromise();
       });
@@ -254,6 +261,7 @@ exports.getallcompanies = async (req, res, next) => {
           }
         });
       }
+      conn.release();
     });
   } catch (error) {
     console.log("Error in fetching all the companis", err);
@@ -364,6 +372,7 @@ exports.editcompany = async (req, res, next) => {
           message: "Company details updated successfully!",
         });
       });
+      conn.release();
     });
   } catch (error) {
     console.log("Error in updating the company details", error);

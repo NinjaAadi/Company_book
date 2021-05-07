@@ -51,7 +51,7 @@ exports.restore = async (req, res) => {
     }
   
     const ress = "cd backup;mysql -u root -p" + pass + " client < dbname.sql";
-    console.log(ress);
+
     exec(ress, (error, stdout, stderr) => {
       if (error) {
         console.log(`error: ${error.message}`);
