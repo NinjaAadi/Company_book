@@ -17,24 +17,20 @@ const SignUp = () => {
     const res = await SignUpUser(name, email, password, adminPassword);
 
     if (res == true) {
-      setSignUpMessage("SUCCESSFULLY REGISTERED");
+      localStorage.setItem("password", password);
+      localStorage.setItem("email", email);
       history.push("/companies");
     } else {
       if (!validator.isEmail(email)) {
         setSignUpMessage("invalid email");
-      }
-      // else if(password.length<6)
-      //     setSignUpMessage("password must be of atleast 6 characters");
-      else if (
-        !validator.isStrongPassword(password, {
-          minLength: 8,
-          minLowercase: 1,
-          minUppercase: 1,
-          minNumbers: 1,
-          minSymbols: 1,
-        })
-      ) {
-        setSignUpMessage("weak password");
+        setTimeout(() => {
+          setSignUpMessage("");
+        }, 1500);
+      } else {
+        setSignUpMessage("Invalid admin password");
+        setTimeout(() => {
+          setSignUpMessage("");
+        }, 1500);
       }
     }
   };

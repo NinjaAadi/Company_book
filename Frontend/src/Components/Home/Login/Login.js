@@ -16,6 +16,8 @@ const Login = () => {
     const res = await LoginUser(email, password, loginMessage);
 
     if (res === true) {
+      localStorage.setItem("password", password);
+      localStorage.setItem("email", email);
       history.push("/companies");
     } else {
       setLoginMessage("INCORRECT USER NAME OR PASSWORD");

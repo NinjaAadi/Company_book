@@ -6,9 +6,7 @@ const SignUpUser = async (name, email, password, adminpass) => {
   try {
     if (
       name.length == 0 ||
-      email.length == 0 ||
-      password.length < 8 ||
-      adminpass.length < 6
+      email.length == 0
     ) {
       return false;
     }

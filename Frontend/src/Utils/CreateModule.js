@@ -17,8 +17,8 @@ const createmodule = async (name) => {
     //Endpoint
     const endpoint = host + "/api/v1/module/createmodule";
     const data = {
-      email,
-      password,
+      email: email || localStorage.getItem("email"),
+      password: password || localStorage.getItem("password"),
       m_name: name,
     };
     const res = await axios.post(endpoint, data, config);

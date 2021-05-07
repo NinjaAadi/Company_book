@@ -28,7 +28,7 @@ exports.auth = async (req, res, next) => {
     }
 
     if (error.length > 0) {
-      res.status(400).json({
+      return res.status(400).json({
         error,
       });
     }

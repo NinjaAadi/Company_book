@@ -13,8 +13,8 @@ const createcompany = async (comp) => {
     //Endpoint
     const endpoint = host + "/api/v1/company/createcompany";
     const data = {
-      email,
-      password,
+      email: email || localStorage.getItem("email"),
+      password: password || localStorage.getItem("password"),
     };
     const c_data = { ...data, ...comp };
     console.log(c_data, config, endpoint);

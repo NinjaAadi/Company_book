@@ -1,7 +1,11 @@
 import axios from "axios";
 import host from "../../host";
 import { email, password } from "../../auth";
-import { SEARCH_ALL_COMP, GET_ALL_COMPANIES,CLEAR_COMP } from "../../Actiontype";
+import {
+  SEARCH_ALL_COMP,
+  GET_ALL_COMPANIES,
+  CLEAR_COMP,
+} from "../../Actiontype";
 
 //Function to fetch all the companies
 const getallcomp = (search_name) => async (dispatch) => {
@@ -17,8 +21,8 @@ const getallcomp = (search_name) => async (dispatch) => {
     };
     let endpoint = host + "/api/v1/company/getallcompanies";
     let data = {
-      email,
-      password,
+      email: email || localStorage.getItem("email"),
+      password: password || localStorage.getItem("password"),
     };
     const res = await axios.post(endpoint, data, config);
     const companies = res.data.c_data;

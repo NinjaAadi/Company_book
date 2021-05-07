@@ -12,12 +12,11 @@ const editmodule = async (id, new_name) => {
       },
     };
 
- 
     //Endpoint
     const endpoint = host + "/api/v1/module/editmodule";
     const data = {
-      email,
-      password,
+      email: email || localStorage.getItem("email"),
+      password: password || localStorage.getItem("password"),
       m_id: id,
       m_name: new_name,
     };

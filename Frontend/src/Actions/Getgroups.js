@@ -15,8 +15,8 @@ export const getgroups = () => async (dispatch) => {
 
   //To be fetched from localstorage
   const data = {
-    email: email,
-    password: password,
+    email: email || localStorage.getItem("email"),
+    password: password || localStorage.getItem("password"),
   };
   //Endpoint
   const endpoint = host + "/api/v1/groups/getallgroups";

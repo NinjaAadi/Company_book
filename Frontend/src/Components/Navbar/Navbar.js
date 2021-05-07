@@ -50,11 +50,6 @@ const Navbar = () => {
             Logout
           </li>
         </ul>
-        <FontAwesomeIcon
-          className={classes.toggler}
-          icon={toggleOn ? faBars : faTimes}
-          onClick={toggleIcon}
-        />
       </div>
     </>
   );

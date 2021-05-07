@@ -17,8 +17,8 @@ const createfield = async (name) => {
     //Endpoint
     const endpoint = host + "/api/v1/field/createfield";
     const data = {
-      email,
-      password,
+      email: email || localStorage.getItem("email"),
+      password: password || localStorage.getItem("password"),
       field_name: name,
       field_original: 0,
     };

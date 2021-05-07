@@ -73,13 +73,14 @@ const ShowCompany = (props) => {
   };
 
   useEffect(() => {
+
     async function getallcompp() {
       await props.getallcompanies();
       await props.getfields();
       await props.getgroups();
     }
     getallcompp();
-  }, []);
+  }, [props]);
 
   return (
     <Fragment>

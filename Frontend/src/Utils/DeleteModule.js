@@ -9,12 +9,11 @@ const deletemodule = async (id) => {
       },
     };
 
-
     //Endpoint
     const endpoint = host + "/api/v1/module/deletemodule";
     const data = {
-      email,
-      password,
+      email: email || localStorage.getItem("email"),
+      password: password || localStorage.getItem("password"),
       m_id: id,
     };
     const res = await axios.post(endpoint, data, config);

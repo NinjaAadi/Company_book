@@ -12,11 +12,9 @@ export const getfields = () => async (dispatch) => {
     },
   };
 
-
-
   const data = {
-    email: email,
-    password: password,
+    email: email || localStorage.getItem("email"),
+    password: password || localStorage.getItem("password"),
   };
   //Endpoint
   const endpoint = host + "/api/v1/field/getallfields";

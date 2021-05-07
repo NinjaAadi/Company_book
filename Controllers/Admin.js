@@ -23,6 +23,7 @@ exports.createuser = async (req, res, next) => {
 
     //Create the user
     await Admin.create(user);
+    console.log("User created successfully...");
     return res.status(200).json({
       message: "User registered successfully!",
       user: user,

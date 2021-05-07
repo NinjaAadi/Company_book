@@ -13,12 +13,11 @@ const editfield = async (old_name, new_name) => {
       },
     };
 
- 
     //Endpoint
     const endpoint = host + "/api/v1/field/editfield";
     const data = {
-      email,
-      password,
+      email: email || localStorage.getItem("email"),
+      password: password || localStorage.getItem("password"),
       old_name,
       new_name,
     };

@@ -15,11 +15,10 @@ const getallcompanies = () => async (dispatch) => {
       },
     };
     //To be fetched from the localstorage
-
     const endpoint = host + "/api/v1/company/getallcompanies";
     const data = {
-      email,
-      password,
+      email: email || localStorage.getItem("email"),
+      password: password || localStorage.getItem("password"),
     };
     const res = await axios.post(endpoint, data, config);
     localStorage.removeItem("allcompany");

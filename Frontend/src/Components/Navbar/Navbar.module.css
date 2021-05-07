@@ -4,13 +4,12 @@
 
   display: flex;
   align-items: center;
-  z-index: 9;
+  z-index:30 !important;
   /* background-color: #5eaaa8; */
   background-color: #1e6f5c;
-  box-shadow: 0px 1px 10px #1e6f5c;
-  
 }
 .title {
+  z-index:30 !important;
   color: white;
   position: absolute;
   left: 4vw;
@@ -18,6 +17,7 @@
   font-size: 25px;
 }
 .navLinks {
+  z-index:30 !important;
   display: flex;
   justify-content: space-around;
   position: absolute;
@@ -28,6 +28,7 @@
 }
 
 .navLinks a {
+  z-index:30 !important;
   text-decoration: none;
   color: white;
   letter-spacing: 2px;
@@ -37,6 +38,7 @@
   text-decoration: underline;
 }
 .toggler {
+  z-index:30 !important;
   position: absolute;
   right: 0px;
   cursor: pointer;
@@ -44,6 +46,10 @@
   display: none;
   right: 1vw;
   color: aliceblue;
+}
+
+.navLinksActive {
+  display: none;
 }
 
 @media only screen and (max-width: 1000px) {
@@ -81,5 +87,16 @@
 
   .navLinksActive a:hover {
     text-decoration: underline;
+  }
+}
+@media only screen and (min-width: 1000px) {
+  .navLinks {
+    display: flex;
+    justify-content: space-around;
+    position: absolute;
+    right: 1vw;
+    width: 60%;
+    list-style: none;
+    font-size: 0.9rem;
   }
 }

@@ -92,7 +92,7 @@ const Backup = () => {
         <div className={classes["head"]}>
           <input
             className={classes["input"]}
-            type="text"
+            type="password"
             placeholder="Enter password"
             value={pass}
             onChange={(e) => {

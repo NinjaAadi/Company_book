@@ -12,12 +12,11 @@ const createperson = async (obj) => {
       },
     };
 
-
     //Endpoint
     const endpoint = host + "/api/v1/person/createperson";
     const data = {
-      email,
-      password,
+      email: email || localStorage.getItem("email"),
+      password: password || localStorage.getItem("password"),
       ...obj,
     };
     const res = await axios.post(endpoint, data, config);

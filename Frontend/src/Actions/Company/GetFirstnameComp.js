@@ -28,8 +28,8 @@ const getfirstnamecomp = (search_name) => async (dispatch) => {
     const companies = res.data.c_data;
     endpoint = host + "/api/v1/query/getcompanybasedonfirstname";
     data = {
-      email,
-      password,
+      email: email || localStorage.getItem("email"),
+      password: password || localStorage.getItem("password"),
       q_string: search_name,
     };
     const comp_first = [];

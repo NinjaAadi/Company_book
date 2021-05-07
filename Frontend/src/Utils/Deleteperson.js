@@ -9,12 +9,11 @@ const deleteperson = async (p_id) => {
       },
     };
 
-   
     //Endpoint
     const endpoint = host + "/api/v1/person/deleteperson";
     const data = {
-      email,
-      password,
+      email: email || localStorage.getItem("email"),
+      password: password || localStorage.getItem("password"),
       p_id,
     };
     const res = await axios.post(endpoint, data, config);

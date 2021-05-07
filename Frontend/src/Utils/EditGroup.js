@@ -12,12 +12,11 @@ const editgroup = async (id, new_name) => {
       },
     };
 
-
     //Endpoint
     const endpoint = host + "/api/v1/groups/editgroup";
     const data = {
-      email,
-      password,
+      email: email || localStorage.getItem("email"),
+      password: password || localStorage.getItem("password"),
       g_id: id,
       g_name: new_name,
     };

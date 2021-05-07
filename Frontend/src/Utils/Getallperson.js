@@ -12,8 +12,8 @@ const getperson = async (C_ID) => {
     //Endpoint
     const endpoint = host + "/api/v1/person/getallperson";
     const data = {
-      email,
-      password,
+      email: email || localStorage.getItem("email"),
+      password: password || localStorage.getItem("password"),
       C_ID,
     };
     const res = await axios.post(endpoint, data, config);

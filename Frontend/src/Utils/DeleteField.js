@@ -10,12 +10,11 @@ const deletefield = async (name) => {
       },
     };
 
-
     //Endpoint
     const endpoint = host + "/api/v1/field/deletefield";
     const data = {
-      email,
-      password,
+      email: email || localStorage.getItem("email"),
+      password: password || localStorage.getItem("password"),
       field_name: name,
     };
     const res = await axios.post(endpoint, data, config);

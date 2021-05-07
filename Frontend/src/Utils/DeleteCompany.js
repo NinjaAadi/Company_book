@@ -9,12 +9,11 @@ const deletecompany = async (id) => {
       },
     };
 
- 
     //Endpoint
     const endpoint = host + "/api/v1/company/deletecompany";
     const data = {
-      email,
-      password,
+      email: email || localStorage.getItem("email"),
+      password: password || localStorage.getItem("password"),
       c_id: id,
     };
     const res = await axios.post(endpoint, data, config);

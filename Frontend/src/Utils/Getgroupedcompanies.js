@@ -12,8 +12,8 @@ const getgroupedcompanies = async (g_string) => {
     //Endpoint
     const endpoint = host + "/api/v1/query/groups";
     const data = {
-      email,
-      password,
+      email: email || localStorage.getItem("email"),
+      password: password || localStorage.getItem("password"),
       g_string,
     };
     const res = await axios.post(endpoint, data, config);
