@@ -46,7 +46,7 @@ exports.getgroupedcompanies = async (req, res, next) => {
 */
 exports.getfirstname = async (req, res, next) => {
   try {
-    console.log("Fetching companies based on regular expressions...");
+    console.log("Fetching companies based on regular expressions1...");
     mysql.getConnection(function (err, conn) {
       if (err) {
         throw err;
@@ -55,8 +55,10 @@ exports.getfirstname = async (req, res, next) => {
       const regx = "'^" + q_string + "'";
       const query =
         "SELECT C_ID FROM COMPANY WHERE C_NAME REGEXP " + regx + ";";
+
       conn.query(query, function (err, rows) {
         if (err) {
+          console.log("error".red);
           throw err;
         }
         const c_id = [];
@@ -80,7 +82,7 @@ exports.getfirstname = async (req, res, next) => {
 */
 exports.getallnames = async (req, res, next) => {
   try {
-    console.log("Fetching companies based on regular expressions...");
+    console.log("Fetching companies based on regular expressions2...");
     mysql.getConnection(function (err, conn) {
       if (err) {
         throw err;

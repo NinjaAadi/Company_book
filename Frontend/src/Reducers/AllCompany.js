@@ -16,7 +16,7 @@ function companyreducer(state = initialstate, action) {
     case GET_ALL_COMPANIES: {
       const all = [];
       data.map((c) => {
-        all.push(c);
+        return all.push(c);
       });
       return {
         companies: data,

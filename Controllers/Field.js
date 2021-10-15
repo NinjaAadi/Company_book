@@ -48,11 +48,11 @@ exports.createfield = async (req, res, next) => {
             throw err;
           }
         });
+        conn.release();
         return res.status(200).json({
           message: "Field added successfully!",
         });
       });
-      conn.release();
     });
   } catch (error) {
     console.log("Error in creating fields", error);
@@ -123,7 +123,7 @@ exports.deletefield = async (req, res, next) => {
       }
       const field_name = req.body.field_name;
       let query =
-        "DELETE FROM C_FIELDS WHERE NAME = " + "'" + field_name + "';";
+        "DELETE FROM C_FIELDS WHERE NAME = " + "\"" + field_name + "\";";
       conn.query(query, function (err, rows) {
         if (err) {
           throw err;

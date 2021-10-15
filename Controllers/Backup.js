@@ -15,9 +15,7 @@ exports.backup = async (req, res) => {
     }
 
     const ress =
-      "mkdir backup;cd backup;rm dbname.sql;mysqldump --add-drop-table -u root -p" +
-      pass +
-      " client> dbname.sql";
+      "del backup\\dbname.sql && \"C:\\Program Files\\MySQL\\MySQL Server 5.7\\bin\\mysqldump.exe\" -u root  -proot  client > .\\backup\\dbname.sql";
     exec(ress, (error, stdout, stderr) => {
       if (error) {
         console.log(`error: ${error.message}`);
@@ -33,8 +31,8 @@ exports.backup = async (req, res) => {
       msg: "Backing",
     });
   } catch (error) {
-    return res.status(400);
     console.log(error);
+    return res.status(400);
   }
 };
 
@@ -49,8 +47,8 @@ exports.restore = async (req, res) => {
     if (!pass) {
       return res.status(400);
     }
-  
-    const ress = "cd backup;mysql -u root -p" + pass + " client < dbname.sql";
+
+    const ress = "\"C:\\Program Files\\MySQL\\MySQL Server 5.7\\bin\\mysql.exe\" -u root -proot client < .\\backup\\dbname.sql";
 
     exec(ress, (error, stdout, stderr) => {
       if (error) {

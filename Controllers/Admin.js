@@ -60,7 +60,7 @@ exports.deleteuser = async (req, res, next) => {
   try {
     console.log("Delete user function running...".red);
     const { userid, adminpass } = req.body;
-    if (adminpass != process.env.ADMIN_PASSWORD) {
+    if (adminpass != "123") {
       return res.status(400).json({
         message: "Not authorized to delete a user",
       });
@@ -76,7 +76,7 @@ exports.deleteuser = async (req, res, next) => {
         message: "User not found or error in deleting the user",
       });
     }
-  } catch (error) {}
+  } catch (error) { }
 };
 /*
 @desc : Get all users

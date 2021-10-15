@@ -15,8 +15,7 @@
     "@fortawesome/fontawesome-svg-core": "^1.2.35",
     "@fortawesome/free-solid-svg-icons": "^5.15.3",
     "@fortawesome/react-fontawesome": "^0.1.14",
-    "bcrypt": "^5.0.1",
-    "bcryptjs": "^2.4.3",
+    "bcryptjs": "2.4.3",
     "colors": "^1.4.0",
     "concurrently": "^6.0.2",
     "cors": "^2.8.5",
@@ -26,6 +25,7 @@
     "mongoose-dynamic-schemas": "^1.2.6",
     "mysql": "^2.18.1",
     "nodemon": "^2.0.7",
-    "pretty-checkbox": "^3.0.3"
+    "pretty-checkbox": "^3.0.3",
+    "serve": "^12.0.1"
   }
 }

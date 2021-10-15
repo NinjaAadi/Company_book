@@ -7,7 +7,7 @@ import { withRouter, Link } from "react-router-dom";
 import Spinner from "../../Spinner/Spinner";
 const Showallcompany = (props) => {
   const history = useHistory();
-  if (props.company.isfetched === false) {
+  if (props.company.isfetched === false||props.fields.isfetched === false) {
     return <Spinner />;
   }
 
@@ -17,7 +17,7 @@ const Showallcompany = (props) => {
   if (authemail === null || authpass === null) {
     history.push("/");
   }
-  const fields = JSON.parse(localStorage.getItem("allfields"));
+  const fields = JSON.parse(localStorage.getItem("allfields"))||[];
   return (
     <Fragment>
       <hr />
@@ -32,13 +32,6 @@ const Showallcompany = (props) => {
           </tr>
           {props.company.querycompanies.map((c) => {
             return (
-              // <tr>
-              //   <td className={classes["td"]}>{c.C_ID}</td>
-              //   <td className={classes["td"]}>{c.C_NAME}</td>
-              //   <td className={classes["td"]}>
-
-              //   </td>
-              // </tr>
               <tr>
                 {fields.map((f) => {
                   if (f.NAME === "C_COUNTRY") {
@@ -81,8 +74,10 @@ const Showallcompany = (props) => {
 };
 Showallcompany.propTypes = {
   company: PropTypes.object.isRequired,
+  fields:PropTypes.object.isRequired
 };
 const mapStatetoProps = (state) => ({
   company: state.All_Companies,
+  fields:state.Field
 });
 export default withRouter(connect(mapStatetoProps, {})(Showallcompany));

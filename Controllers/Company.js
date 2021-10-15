@@ -43,13 +43,16 @@ exports.createcompany = async (req, res, next) => {
 
       var companyid;
       conn.query(query1, async function (err, rows) {
-        companyid = await rows.insertId;
-        awaiting();
         if (err) {
+          console.log("Error is ", err);
+          console.log(query1);
+          console.log("error ".red);
           return res.status(400).json({
             err,
           });
         }
+        companyid = await rows.insertId;
+        awaiting();
       });
 
       function awaiting() {
@@ -83,6 +86,7 @@ exports.createcompany = async (req, res, next) => {
           query = "INSERT INTO  M_LINK (C_ID,M_ID) VALUES ?";
           conn.query(query, [values], function (err, rows) {
             if (err) {
+              conn.release();
               return res.status(400).json({
                 err,
               });
@@ -169,7 +173,6 @@ exports.getallcompanies = async (req, res, next) => {
           throw err;
         }
         c_data = rows;
-        console.log(c_data.length);
         if (c_data.length == 0) {
           return res.status(200).json({
             c_data: [],
@@ -368,6 +371,7 @@ exports.editcompany = async (req, res, next) => {
             throw err;
           }
         });
+        conn.release();
         return res.status(200).json({
           message: "Company details updated successfully!",
         });

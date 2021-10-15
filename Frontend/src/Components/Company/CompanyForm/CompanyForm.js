@@ -33,6 +33,8 @@ const CompanyForm = (props) => {
   if (authemail === null || authpass === null) {
     history.push("/");
   }
+  const [date, setdate] = useState();
+
   useEffect(() => {
     async function fetchall() {
       await props.getgroups();
@@ -41,9 +43,12 @@ const CompanyForm = (props) => {
       await props.getallcompanies();
     }
     fetchall();
+    const dd = Date.now();
+    const currd = new Date(dd);
+    setdate(currd);
   }, [err]);
 
-  const [date, setdate] = useState(Date.now());
+  
 
   //For groups
   const [value, setvalue] = useState();

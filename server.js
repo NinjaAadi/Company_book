@@ -31,6 +31,6 @@ app.use("/api/v1/", person);
 app.use("/api/v1/", query);
 app.use("/api/v1/", backup);
 //Listen to port
-app.listen(process.env.PORT || 5000, () => {
-  console.log(`Server running at post ${process.env.PORT}`.green.inverse);
+app.listen(5000, () => {
+  console.log(`Server running at port`.green.inverse);
 });

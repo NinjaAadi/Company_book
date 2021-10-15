@@ -72,10 +72,7 @@ const EditCompany = (props) => {
       newobj[keyy] = value;
     }
     setprevobj(newobj);
-    console.log(company["C_CREATED_AT"]);
-    console.log(Date.parse(company["C_CREATED_AT"]));
     const nd = new Date(Date.parse(company["C_CREATED_AT"]));
-    console.log(nd);
     setdate(nd);
     setcountry(JSON.parse(company["C_COUNTRY"]));
     console.log(newobj);

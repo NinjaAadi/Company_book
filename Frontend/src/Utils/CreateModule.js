@@ -13,7 +13,6 @@ const createmodule = async (name) => {
     };
 
 
-    const password = "123456";
     //Endpoint
     const endpoint = host + "/api/v1/module/createmodule";
     const data = {

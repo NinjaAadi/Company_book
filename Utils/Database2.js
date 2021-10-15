@@ -5,7 +5,7 @@ var pool = mysql.createPool({
   user: "root",
   password: "aaditya123",
   database: "client",
-  connectionLimit: 151,
+  connectionLimit: 10000,
 });
 
 exports.pool = pool;

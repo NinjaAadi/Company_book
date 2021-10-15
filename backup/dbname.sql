@@ -1,13 +1,13 @@
--- MySQL dump 10.13  Distrib 8.0.23, for osx10.16 (x86_64)
+-- MySQL dump 10.13  Distrib 5.7.27, for Win64 (x86_64)
 --
 -- Host: localhost    Database: client
 -- ------------------------------------------------------
--- Server version	8.0.23
+-- Server version	5.7.27
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!50503 SET NAMES utf8mb4 */;
+/*!40101 SET NAMES utf8 */;
 /*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
 /*!40103 SET TIME_ZONE='+00:00' */;
 /*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
@@ -16,199 +16,191 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `C_FIELDS`
+-- Table structure for table `c_fields`
 --
 
-DROP TABLE IF EXISTS `C_FIELDS`;
+DROP TABLE IF EXISTS `c_fields`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `C_FIELDS` (
-  `ID` int NOT NULL AUTO_INCREMENT,
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `c_fields` (
+  `ID` int(11) NOT NULL AUTO_INCREMENT,
   `NAME` varchar(255) DEFAULT NULL,
-  `ISORIGINAL` int DEFAULT '1',
+  `ISORIGINAL` int(11) DEFAULT '1',
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=73 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `C_FIELDS`
+-- Dumping data for table `c_fields`
 --
 
-LOCK TABLES `C_FIELDS` WRITE;
-/*!40000 ALTER TABLE `C_FIELDS` DISABLE KEYS */;
-INSERT INTO `C_FIELDS` VALUES (1,'C_NAME',1),(2,'C_COUNTRY',1),(3,'C_PHONE_1',1),(4,'C_PHONE_2',1),(5,'C_TAX_NUMBER',1),(6,'C_CREATED_AT',1),(7,'C_ACTIVE',1),(11,'C_NOTES',1),(62,'Temp11',0),(63,'Temp3',0),(64,'Temp7',0),(69,'Temp16',0),(71,'Temp19',0);
-/*!40000 ALTER TABLE `C_FIELDS` ENABLE KEYS */;
+LOCK TABLES `c_fields` WRITE;
+/*!40000 ALTER TABLE `c_fields` DISABLE KEYS */;
+INSERT INTO `c_fields` VALUES (1,'C_NAME',1),(2,'C_COUNTRY',1),(3,'C_PHONE_1',1),(4,'C_PHONE_2',1),(5,'C_TAX_NUMBER',1),(6,'C_CREATED_AT',1),(7,'C_ACTIVE',1),(11,'C_NOTES',1),(12,'newfield5',0);
+/*!40000 ALTER TABLE `c_fields` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Table structure for table `C_GROUP`
+-- Table structure for table `c_group`
 --
 
-DROP TABLE IF EXISTS `C_GROUP`;
+DROP TABLE IF EXISTS `c_group`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `C_GROUP` (
-  `G_ID` int NOT NULL AUTO_INCREMENT,
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `c_group` (
+  `G_ID` int(11) NOT NULL AUTO_INCREMENT,
   `G_NAME` varchar(300) DEFAULT NULL,
   PRIMARY KEY (`G_ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `C_GROUP`
+-- Dumping data for table `c_group`
 --
 
-LOCK TABLES `C_GROUP` WRITE;
-/*!40000 ALTER TABLE `C_GROUP` DISABLE KEYS */;
-INSERT INTO `C_GROUP` VALUES (5,'ACM1'),(6,'temp_grp'),(17,'Temp_10'),(18,'temp_grp_2'),(19,'temp4');
-/*!40000 ALTER TABLE `C_GROUP` ENABLE KEYS */;
+LOCK TABLES `c_group` WRITE;
+/*!40000 ALTER TABLE `c_group` DISABLE KEYS */;
+INSERT INTO `c_group` VALUES (1,'newgroup'),(2,'newgrp2');
+/*!40000 ALTER TABLE `c_group` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Table structure for table `C_MODULE`
+-- Table structure for table `c_module`
 --
 
-DROP TABLE IF EXISTS `C_MODULE`;
+DROP TABLE IF EXISTS `c_module`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `C_MODULE` (
-  `M_ID` int NOT NULL AUTO_INCREMENT,
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `c_module` (
+  `M_ID` int(11) NOT NULL AUTO_INCREMENT,
   `M_NAME` varchar(300) DEFAULT NULL,
   PRIMARY KEY (`M_ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `C_MODULE`
+-- Dumping data for table `c_module`
 --
 
-LOCK TABLES `C_MODULE` WRITE;
-/*!40000 ALTER TABLE `C_MODULE` DISABLE KEYS */;
-INSERT INTO `C_MODULE` VALUES (4,'module_4'),(7,'module_5'),(8,'module_6'),(9,'temp');
-/*!40000 ALTER TABLE `C_MODULE` ENABLE KEYS */;
+LOCK TABLES `c_module` WRITE;
+/*!40000 ALTER TABLE `c_module` DISABLE KEYS */;
+INSERT INTO `c_module` VALUES (1,'newmod');
+/*!40000 ALTER TABLE `c_module` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Table structure for table `C_PERSON`
+-- Table structure for table `c_person`
 --
 
-DROP TABLE IF EXISTS `C_PERSON`;
+DROP TABLE IF EXISTS `c_person`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `C_PERSON` (
-  `ID` int NOT NULL AUTO_INCREMENT,
-  `C_ID` int DEFAULT NULL,
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `c_person` (
+  `ID` int(11) NOT NULL AUTO_INCREMENT,
+  `C_ID` int(11) DEFAULT NULL,
   `NAME` varchar(255) DEFAULT NULL,
   `DESIGNATION` varchar(255) DEFAULT NULL,
   `MOBILE` varchar(255) DEFAULT NULL,
   `EMAIL` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`ID`),
   KEY `C_ID` (`C_ID`),
-  CONSTRAINT `c_person_ibfk_1` FOREIGN KEY (`C_ID`) REFERENCES `COMPANY` (`C_ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  CONSTRAINT `c_person_ibfk_1` FOREIGN KEY (`C_ID`) REFERENCES `company` (`C_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `C_PERSON`
+-- Dumping data for table `c_person`
 --
 
-LOCK TABLES `C_PERSON` WRITE;
-/*!40000 ALTER TABLE `C_PERSON` DISABLE KEYS */;
-/*!40000 ALTER TABLE `C_PERSON` ENABLE KEYS */;
+LOCK TABLES `c_person` WRITE;
+/*!40000 ALTER TABLE `c_person` DISABLE KEYS */;
+/*!40000 ALTER TABLE `c_person` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Table structure for table `COMPANY`
+-- Table structure for table `company`
 --
 
-DROP TABLE IF EXISTS `COMPANY`;
+DROP TABLE IF EXISTS `company`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `COMPANY` (
-  `C_ID` int NOT NULL AUTO_INCREMENT,
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `company` (
+  `C_ID` int(11) NOT NULL AUTO_INCREMENT,
   `C_NAME` varchar(300) DEFAULT NULL,
   `C_COUNTRY` varchar(300) DEFAULT NULL,
   `C_PHONE_1` varchar(20) DEFAULT NULL,
   `C_PHONE_2` varchar(20) DEFAULT NULL,
   `C_TAX_NUMBER` varchar(100) DEFAULT NULL,
   `C_CREATED_AT` varchar(100) DEFAULT NULL,
-  `C_ACTIVE` int DEFAULT '1',
+  `C_ACTIVE` int(11) DEFAULT '1',
   `C_NOTES` varchar(255) DEFAULT NULL,
-  `Temp11` varchar(255) DEFAULT NULL,
-  `Temp3` varchar(255) DEFAULT NULL,
-  `Temp7` varchar(255) DEFAULT NULL,
-  `Temp16` varchar(255) DEFAULT NULL,
-  `Temp19` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`C_ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=50 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `COMPANY`
+-- Dumping data for table `company`
 --
 
-LOCK TABLES `COMPANY` WRITE;
-/*!40000 ALTER TABLE `COMPANY` DISABLE KEYS */;
-INSERT INTO `COMPANY` VALUES (47,'FINALTEST220','{\"value\":\"ET\",\"label\":\"Ethiopia\"}','','','','1649431033000',1,'','','','','','null'),(48,'FINALTEST25','{\"value\":\"AL\",\"label\":\"Albania\"}','','','','Fri Apr 02 2021 21:56:13 GMT+0530 (India Standard Time)',1,'','','','','',NULL),(49,'test234','\"\"','','','','Thu Apr 15 2021 23:05:20 GMT+0530 (India Standard Time)',1,'','','','','','');
-/*!40000 ALTER TABLE `COMPANY` ENABLE KEYS */;
+LOCK TABLES `company` WRITE;
+/*!40000 ALTER TABLE `company` DISABLE KEYS */;
+/*!40000 ALTER TABLE `company` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Table structure for table `G_LINK`
+-- Table structure for table `g_link`
 --
 
-DROP TABLE IF EXISTS `G_LINK`;
+DROP TABLE IF EXISTS `g_link`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `G_LINK` (
-  `ID` int NOT NULL AUTO_INCREMENT,
-  `C_ID` int DEFAULT NULL,
-  `G_ID` int DEFAULT NULL,
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `g_link` (
+  `ID` int(11) NOT NULL AUTO_INCREMENT,
+  `C_ID` int(11) DEFAULT NULL,
+  `G_ID` int(11) DEFAULT NULL,
   PRIMARY KEY (`ID`),
   KEY `C_ID` (`C_ID`),
   KEY `G_ID` (`G_ID`),
-  CONSTRAINT `g_link_ibfk_1` FOREIGN KEY (`C_ID`) REFERENCES `COMPANY` (`C_ID`),
-  CONSTRAINT `g_link_ibfk_2` FOREIGN KEY (`G_ID`) REFERENCES `C_GROUP` (`G_ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=250 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  CONSTRAINT `g_link_ibfk_1` FOREIGN KEY (`C_ID`) REFERENCES `company` (`C_ID`),
+  CONSTRAINT `g_link_ibfk_2` FOREIGN KEY (`G_ID`) REFERENCES `c_group` (`G_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `G_LINK`
+-- Dumping data for table `g_link`
 --
 
-LOCK TABLES `G_LINK` WRITE;
-/*!40000 ALTER TABLE `G_LINK` DISABLE KEYS */;
-INSERT INTO `G_LINK` VALUES (245,48,5),(246,48,6),(248,47,18),(249,49,5);
-/*!40000 ALTER TABLE `G_LINK` ENABLE KEYS */;
+LOCK TABLES `g_link` WRITE;
+/*!40000 ALTER TABLE `g_link` DISABLE KEYS */;
+/*!40000 ALTER TABLE `g_link` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Table structure for table `M_LINK`
+-- Table structure for table `m_link`
 --
 
-DROP TABLE IF EXISTS `M_LINK`;
+DROP TABLE IF EXISTS `m_link`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `M_LINK` (
-  `ID` int NOT NULL AUTO_INCREMENT,
-  `C_ID` int DEFAULT NULL,
-  `M_ID` int DEFAULT NULL,
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `m_link` (
+  `ID` int(11) NOT NULL AUTO_INCREMENT,
+  `C_ID` int(11) DEFAULT NULL,
+  `M_ID` int(11) DEFAULT NULL,
   PRIMARY KEY (`ID`),
   KEY `C_ID` (`C_ID`),
   KEY `M_ID` (`M_ID`),
-  CONSTRAINT `m_link_ibfk_1` FOREIGN KEY (`C_ID`) REFERENCES `COMPANY` (`C_ID`),
-  CONSTRAINT `m_link_ibfk_2` FOREIGN KEY (`M_ID`) REFERENCES `C_MODULE` (`M_ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=165 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  CONSTRAINT `m_link_ibfk_1` FOREIGN KEY (`C_ID`) REFERENCES `company` (`C_ID`),
+  CONSTRAINT `m_link_ibfk_2` FOREIGN KEY (`M_ID`) REFERENCES `c_module` (`M_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `M_LINK`
+-- Dumping data for table `m_link`
 --
 
-LOCK TABLES `M_LINK` WRITE;
-/*!40000 ALTER TABLE `M_LINK` DISABLE KEYS */;
-INSERT INTO `M_LINK` VALUES (160,48,4),(161,48,7),(164,47,8);
-/*!40000 ALTER TABLE `M_LINK` ENABLE KEYS */;
+LOCK TABLES `m_link` WRITE;
+/*!40000 ALTER TABLE `m_link` DISABLE KEYS */;
+/*!40000 ALTER TABLE `m_link` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -220,4 +212,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-05-08  0:27:21
+-- Dump completed on 2021-05-08 11:24:14

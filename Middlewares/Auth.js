@@ -6,6 +6,7 @@ exports.auth = async (req, res, next) => {
   try {
     console.log("Authorization function running...");
     const { name, email, password, adminpass } = req.body;
+    console.log(adminpass);
     const error = [];
 
     //Validate the credentials
@@ -23,7 +24,7 @@ exports.auth = async (req, res, next) => {
     if (password.length < 6) {
       error.push("Please enter a valid password");
     }
-    if (adminpass != process.env.ADMIN_PASSWORD) {
+    if (adminpass != "123") {
       error.push("Invalid admin password");
     }
 
@@ -33,7 +34,7 @@ exports.auth = async (req, res, next) => {
       });
     }
     next();
-  } catch (error) {}
+  } catch (error) { }
 };
 
 //Function to validate while the user is performing a login
@@ -48,7 +49,7 @@ exports.loginauth = async (req, res, next) => {
         /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/
       )
     ) {
-      error.push("Invalid email or password");
+      error.push("Invalid email");
       return res.status(400).json({
         error,
       });
@@ -56,13 +57,15 @@ exports.loginauth = async (req, res, next) => {
     //Check if user exist or not
     const user = await Admin.findOne({ email });
     if (!user) {
-      error.push("Invalid email or password");
+      error.push("Can't Find User");
       return res.status(400).json({
         error,
       });
     }
     if (!(await matchpass(password, user.password))) {
-      error.push("Invalid email or password");
+      console.log(password);
+      console.log(user.password);
+      error.push("Password Did Not Matched");
       return res.status(400).json({
         error,
       });

@@ -2,7 +2,7 @@
 const mongoose = require("mongoose");
 const colors = require("colors");
 /*Mongodb url */
-const URL = process.env.MONGODB_URL;
+const URL = "mongodb://localhost:27017/client";
 
 const connectDb = async () => {
   try {
@@ -15,6 +15,8 @@ const connectDb = async () => {
         useUnifiedTopology: true,
       },
       (error) => {
+        if (error)
+          throw error;
         console.log("Mongo DB connected".yellow.inverse);
       }
     );
