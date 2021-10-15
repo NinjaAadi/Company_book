@@ -6,7 +6,7 @@
   "scripts": {
     "nodemon": "nodemon server",
     "start": "nodemon server.js",
-    "frontend": "PORT=3000 npm start --prefix Frontend",
+    "frontend": "npm start --prefix Frontend",
     "both": "concurrently \"npm start\" \" npm run frontend\""
   },
   "author": "Aaditya Pal",
