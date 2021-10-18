@@ -36,6 +36,7 @@ const EditCompany = (props) => {
     history.push("/");
   }
   useEffect(() => {
+    console.log("This is called");
     async function fetchall() {
       await props.getgroups();
       await props.getmodules();
@@ -43,7 +44,7 @@ const EditCompany = (props) => {
       await props.getallcompanies();
     }
     fetchall();
-  }, [err]);
+  }, []);
 
   useEffect(() => {
     let company;
@@ -72,12 +73,14 @@ const EditCompany = (props) => {
       newobj[keyy] = value;
     }
     setprevobj(newobj);
-    console.log(prevobj);
     const nd = new Date(Date.parse(company["C_CREATED_AT"]));
     setdate(nd);
     setcountry(JSON.parse(company["C_COUNTRY"]));
-    console.log(newobj);
-  }, []);
+    //Main logic here
+    console.log(props.groups.c_groups);
+    console.log(props.modules.c_modules);
+    console.log(props.fields.c_fields);
+  }, [props.groups.c_groups, props.modules.c_modules, props.fields.c_fields]);
 
   //For groups
   let value;
@@ -132,27 +135,31 @@ const EditCompany = (props) => {
 
   //on form submission
   const editdate = async (e, it) => {
-    const res = {"C_ID": prevobj["C_ID"], "key": it, "value": date.toString()};
+    const res = { C_ID: prevobj["C_ID"], key: it, value: date.toString() };
     // console.log(res);
     // console.log(it);
     const rres = await editcompany(res);
-  }
+  };
   const edit = async (e, it) => {
-    const res = {"C_ID": prevobj["C_ID"], "key": it, "value": prevobj[it]};
+    const res = { C_ID: prevobj["C_ID"], key: it, value: prevobj[it] };
     // console.log(res);
     console.log(prevobj);
     // console.log(it);
     const rres = await editcompany(res);
-  }
-  
+  };
+
   const editcountry = async (e, it) => {
-    const res = {"C_ID": prevobj["C_ID"], "key": it, "value": JSON.stringify(country)};
+    const res = {
+      C_ID: prevobj["C_ID"],
+      key: it,
+      value: JSON.stringify(country),
+    };
     // console.log(res);
     console.log(JSON.stringify(country));
     // console.log(it);
     const rres = await editcompany(res);
-  }
-  
+  };
+
   const create = async (e) => {
     if (
       props.location.company === undefined ||
@@ -219,9 +226,6 @@ const EditCompany = (props) => {
     }, 2000);
   };
 
-
-
-
   //Create the group array for dropdown
   const g_options = [];
   const m_options = [];
@@ -280,9 +284,7 @@ const EditCompany = (props) => {
         <i style={{ color: "#f58634" }} class="fas fa-building"></i>
       </h1>
       <br />
-      <p style={{ color: "red" }}>
-        Edit the groups and modules at the end!
-      </p>
+      <p style={{ color: "red" }}>Edit the groups and modules at the end!</p>
       <hr />
       <p className={classes["p"]}>
         Date{" "}
@@ -298,7 +300,7 @@ const EditCompany = (props) => {
           scrollableMonthYearDropdown
           showYearDropdown
         />
-      <button onClick={(e) => editdate(e, "C_CREATED_AT")}>Update</button>
+        <button onClick={(e) => editdate(e, "C_CREATED_AT")}>Update</button>
       </div>
       <br />
       <p style={{ color: "red" }}>
@@ -358,7 +360,7 @@ const EditCompany = (props) => {
           False
         </option>
       </select>
-        <button onClick={(e) => edit(e, "C_ACTIVE")}>Update</button>
+      <button onClick={(e) => edit(e, "C_ACTIVE")}>Update</button>
       <p className={classes["p"]}>
         C_COUNTRY{" "}
         <i
