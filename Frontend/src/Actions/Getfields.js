@@ -20,7 +20,6 @@ export const getfields = () => async (dispatch) => {
   const endpoint = host + "/api/v1/field/getallfields";
 
   const fields = await axios.post(endpoint, data, config);
-  console.log(fields);
   localStorage.removeItem("allfields");
   localStorage.setItem("allfields", JSON.stringify(fields.data.rows));
   //Dispatch the data into the store
