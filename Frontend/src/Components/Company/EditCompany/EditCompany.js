@@ -146,6 +146,7 @@ const EditCompany = (props) => {
       setdate(nd);
       setcountry(JSON.parse(company["C_COUNTRY"]));
       console.log(newobj);
+      console.log(newobj);
     })
     
   }, []);
