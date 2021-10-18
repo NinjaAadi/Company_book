@@ -19,7 +19,7 @@ exports.createcompany = async (req, res, next) => {
       const values = Object.values(queryobj);
       let query1 = "INSERT INTO COMPANY (";
       let query2 = "VALUES (";
-      
+
       let n = values.length;
       for (var i = 0; i < n; i++) {
         const key = name[i];
@@ -40,8 +40,7 @@ exports.createcompany = async (req, res, next) => {
       query1 += ")";
       query2 += ");";
       query1 += query2;
-      console.log(query1)
-      
+
       var companyid;
       conn.query(query1, async function (err, rows) {
         if (err) {
@@ -277,34 +276,6 @@ exports.getallcompanies = async (req, res, next) => {
 @route: company/editcompany
 @access :private
 */
-
-exports.newedit = async (req, res, next) => {
-  try {
-    console.log("Newedit function called".yellow);
-    mysql.getConnection(function (err, conn) {
-      if (err) {
-        throw err;
-      }
-      const companyid = req.body.C_ID;
-      const key = req.body.key;
-      const value = req.body.value;
-      console.log(req.body)
-      if(value)
-      query = "UPDATE COMPANY SET " + key + " = " + "'" + value + "'" + " WHERE C_ID = " + companyid + ";";
-      conn.query(query, function (err, rows) {
-        if (err) {
-          throw err;
-        }
-      });
-      return res.status(200).json({
-        message: "Company details updated successfully new!",
-      })
-    })
-  } catch (error) {
-    console.log("Error in updating the company details", error);
-  }
-}
-
 exports.editcompany = async (req, res, next) => {
   try {
     console.log("Company details being modified...");
