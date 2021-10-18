@@ -69,13 +69,18 @@ const EditCompany = (props) => {
       if (value === null || value === undefined) {
         value = "null";
       }
-      newobj[keyy] = value;
-    }
-    setprevobj(newobj);
-    const nd = new Date(Date.parse(company["C_CREATED_AT"]));
-    setdate(nd);
-    setcountry(JSON.parse(company["C_COUNTRY"]));
-    console.log(newobj);
+      // console.log(newobj);
+      setprevobj(newobj);
+      set_default_groups_modules(props.modules.c_groups, props.modules.c_modules);
+      // setgroups()
+      // console.log(prevobj);
+      const nd = new Date(Date.parse(company["C_CREATED_AT"]));
+      setdate(nd);
+      setcountry(JSON.parse(company["C_COUNTRY"]));
+      console.log(newobj);
+      console.log(newobj);
+    })
+    
   }, []);
 
   //For groups
@@ -367,6 +372,7 @@ const EditCompany = (props) => {
                 name={it.NAME}
                 onChange={(e) => onChange(e)}
               />
+              <button onClick={(e) => edit(e, it.NAME)}>Update </button>
             </Fragment>
           );
         }
