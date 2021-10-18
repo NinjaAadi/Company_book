@@ -10,7 +10,7 @@ const editcompany = async (comp) => {
     };
 
     //Endpoint
-    const endpoint = host + "/api/v1/company/editcompany";
+    const endpoint = host + "/api/v1/company/newedit";
     const data = {
       email: email || localStorage.getItem("email"),
       password: password || localStorage.getItem("password"),
@@ -18,6 +18,7 @@ const editcompany = async (comp) => {
     const c_data = { ...data, ...comp };
     console.log(c_data, config, endpoint);
     const res = await axios.post(endpoint, c_data, config);
+    console.log(res);
     const commp = JSON.stringify(comp);
     localStorage.removeItem("comp");
     localStorage.setItem("comp", commp);

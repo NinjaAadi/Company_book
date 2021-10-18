@@ -48,8 +48,6 @@ const CompanyForm = (props) => {
     setdate(currd);
   }, [err]);
 
-  
-
   //For groups
   const [value, setvalue] = useState();
 

@@ -2,7 +2,7 @@
 const mongoose = require("mongoose");
 const colors = require("colors");
 /*Mongodb url */
-const URL = "mongodb://localhost:27017/client";
+const URL = "mongodb://127.0.0.1:27017/client";
 
 const connectDb = async () => {
   try {
