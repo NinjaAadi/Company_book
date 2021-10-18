@@ -72,6 +72,7 @@ const EditCompany = (props) => {
       newobj[keyy] = value;
     }
     setprevobj(newobj);
+    console.log(prevobj);
     const nd = new Date(Date.parse(company["C_CREATED_AT"]));
     setdate(nd);
     setcountry(JSON.parse(company["C_COUNTRY"]));
@@ -130,6 +131,28 @@ const EditCompany = (props) => {
   };
 
   //on form submission
+  const editdate = async (e, it) => {
+    const res = {"C_ID": prevobj["C_ID"], "key": it, "value": date.toString()};
+    // console.log(res);
+    // console.log(it);
+    const rres = await editcompany(res);
+  }
+  const edit = async (e, it) => {
+    const res = {"C_ID": prevobj["C_ID"], "key": it, "value": prevobj[it]};
+    // console.log(res);
+    console.log(prevobj);
+    // console.log(it);
+    const rres = await editcompany(res);
+  }
+  
+  const editcountry = async (e, it) => {
+    const res = {"C_ID": prevobj["C_ID"], "key": it, "value": JSON.stringify(country)};
+    // console.log(res);
+    console.log(JSON.stringify(country));
+    // console.log(it);
+    const rres = await editcompany(res);
+  }
+  
   const create = async (e) => {
     if (
       props.location.company === undefined ||
@@ -195,6 +218,9 @@ const EditCompany = (props) => {
       seterr("");
     }, 2000);
   };
+
+
+
 
   //Create the group array for dropdown
   const g_options = [];
@@ -272,6 +298,7 @@ const EditCompany = (props) => {
           scrollableMonthYearDropdown
           showYearDropdown
         />
+      <button onClick={(e) => editdate(e, "C_CREATED_AT")}>Update</button>
       </div>
       <br />
       <p style={{ color: "red" }}>
@@ -331,6 +358,7 @@ const EditCompany = (props) => {
           False
         </option>
       </select>
+        <button onClick={(e) => edit(e, "C_ACTIVE")}>Update</button>
       <p className={classes["p"]}>
         C_COUNTRY{" "}
         <i
@@ -341,7 +369,7 @@ const EditCompany = (props) => {
       <div className={classes["country"]}>
         <Select options={options} value={country} onChange={changecountry} />
       </div>
-
+      <button onClick={(e) => editcountry(e, "C_COUNTRY")}>Update</button>
       {fields.map((it) => {
         if (
           it.NAME !== "C_ACTIVE" &&
@@ -367,6 +395,7 @@ const EditCompany = (props) => {
                 name={it.NAME}
                 onChange={(e) => onChange(e)}
               />
+              <button onClick={(e) => edit(e, it.NAME)}>Update</button>
             </Fragment>
           );
         }
@@ -387,6 +416,8 @@ const EditCompany = (props) => {
         value={prevobj["C_NOTES"]}
         onChange={(e) => onChange(e)}
       />
+
+      <button onClick={(e) => edit(e, "C_NOTES")}>Update</button>
       <br />
       <br />
       <hr />
@@ -411,18 +442,19 @@ const EditCompany = (props) => {
                 name={it.NAME}
                 onChange={(e) => onChange(e)}
               />
+              <button onClick={(e) => edit(e, it.NAME)}>Update</button>
             </Fragment>
           );
         }
       })}
       {err}
-      <button
+      {/* <button
         className={classes["submit"]}
         onClick={(e) => create(e)}
         style={{ cursor: "pointer" }}
       >
         Update company table <i class="fas fa-pen"></i>
-      </button>
+      </button> */}
     </div>
   );
 };
@@ -448,3 +480,5 @@ export default connect(mapStatetoProps, {
   getfields,
   getallcompanies,
 })(EditCompany);
+
+
