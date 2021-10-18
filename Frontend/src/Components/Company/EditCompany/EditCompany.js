@@ -439,7 +439,7 @@ const EditCompany = (props) => {
                 name={it.NAME}
                 onChange={(e) => onChange(e)}
               />
-              <button onClick={(e) => edit(e, it.NAME)}>Update</button>
+              <button onClick={(e) => edit(e, it.NAME)}>Update </button>
             </Fragment>
           );
         }
