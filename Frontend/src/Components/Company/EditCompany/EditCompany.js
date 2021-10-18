@@ -21,6 +21,9 @@ const EditCompany = (props) => {
   //state for error message
   const [err, seterr] = useState("");
   const [prevobj, setprevobj] = useState({});
+  const [groups, setgroups] = useState([]);
+  const [g_options, setg_options] = useState([]);
+  const [m_options, setm_options] = useState([]);
   //For country codes
   const [country, setcountry] = useState("");
   const options = useMemo(() => countryList().getData(), []);
@@ -35,48 +38,116 @@ const EditCompany = (props) => {
   if (authemail === null || authpass === null) {
     history.push("/");
   }
-  useEffect(() => {
-    async function fetchall() {
-      await props.getgroups();
-      await props.getmodules();
-      await props.getfields();
-      await props.getallcompanies();
+  //function to set groups
+  const set_default_groups_modules = (allgroups, allmodules) => {
+    let prev_g;
+    let prev_m;
+    if (props.location.company != null && props.location.company != undefined) {
+      prev_g = props.location.company["C_G_ID"];
+      prev_m = props.location.company["C_M_ID"];
+    } else {
+      let company = JSON.parse(localStorage.getItem("comp"));
+      prev_g = company["C_G_ID"];
+      prev_m = company["C_M_ID"];
     }
-    fetchall();
-  }, [err]);
+    let def_g = [];
+    for (var i = 0; i < prev_g.length; i++) {
+      let id = prev_g[i];
+      allgroups.map((g) => {
+        if (g.G_ID === id) {
+          return def_g.push({
+            label: g.G_NAME,
+            value: g.G_ID,
+          });
+        }
+      });
+    }
+    for (var i = 0; i < prev_m.length; i++) {
+      let id = prev_m[i];
+      allmodules.map((g) => {
+        if (g.M_ID === id) {
+          return def_m.push({
+            label: g.M_NAME,
+            value: g.M_ID,
+          });
+        }
+      });
+    }
+    //setting options for groups and modules
+    const t_g_options = [];
+    const t_m_options = [];
+    allgroups.map((g) => {
+      return t_g_options.push({
+        label: g.G_NAME,
+        value: g.G_ID,
+      });
+    });
+    allmodules.map((m) => {
+      return t_m_options.push({
+        label: m.M_NAME,
+        value: m.M_ID,
+      });
+    });
+    setg_options(t_g_options);
+    setm_options(t_m_options);
+    setgroups(def_g);
+  }
+
+  // useEffect(() => {
+   
+  // }, [err]);
 
   useEffect(() => {
-    let company;
-    if (
-      props.location.company === undefined ||
-      props.location.company === null
-    ) {
-      company = JSON.parse(localStorage.getItem("comp"));
-    } else {
-      company = props.location.company;
-    }
-    const comparr = Object.entries(company);
-    const newobj = {};
-    for (var i = 0; i < comparr.length; i++) {
-      const keyy = comparr[i][0];
-      let value = comparr[i][1];
-      if (keyy instanceof Array) {
-        continue;
+    const newPromise = new Promise((res, rej) => {
+      async function fetchall(){
+        await props.getgroups();
+        await props.getmodules();
+        await props.getfields();
+        await props.getallcompanies();
+        res("success")
       }
-      if (keyy == "C_PERSON") {
-        continue;
+      fetchall();
+    })
+    newPromise
+    .then(value => {
+      console.log(props.fields)
+      return;
+      let company;
+      if (
+        props.location.company === undefined ||
+        props.location.company === null
+      ) {
+        company = JSON.parse(localStorage.getItem("comp"));
+      } else {
+        company = props.location.company;
       }
-      if (value === null || value === undefined) {
-        value = "null";
+      const comparr = Object.entries(company);
+      const newobj = {};
+      for (var i = 0; i < comparr.length; i++) {
+        const keyy = comparr[i][0];
+        let value = comparr[i][1];
+        if (keyy instanceof Array) {
+          continue;
+        }
+        if (keyy == "C_PERSON") {
+          continue;
+        }
+        if (value === null || value === undefined) {
+          value = "null";
+        }
+        newobj[keyy] = value;
       }
-      newobj[keyy] = value;
-    }
-    setprevobj(newobj);
-    console.log(prevobj);
-    const nd = new Date(Date.parse(company["C_CREATED_AT"]));
-    setdate(nd);
-    setcountry(JSON.parse(company["C_COUNTRY"]));
-    console.log(newobj);
+      // console.log(newobj);
+      setprevobj(newobj);
+      set_default_groups_modules(props.modules.c_groups, props.modules.c_modules);
+      // setgroups()
+      // console.log(prevobj);
+      const nd = new Date(Date.parse(company["C_CREATED_AT"]));
+      setdate(nd);
+      setcountry(JSON.parse(company["C_COUNTRY"]));
+      console.log(newobj);
+    })
+    
   }, []);
 
   //For groups
@@ -108,10 +179,9 @@ const EditCompany = (props) => {
     );
   }
   //get the groups
-  const allgroups = props.groups.c_groups;
-
+  
   //get the modules
-  const allmodules = props.modules.c_modules;
+
 
   //get the fields
   const fields = props.fields.c_fields;
@@ -152,6 +222,25 @@ const EditCompany = (props) => {
     // console.log(it);
     const rres = await editcompany(res);
   }
+  const edit_groups_modules = async (e, it) => {
+    if (value != undefined && value != null && value.length != 0) {
+      res["C_G_ID"] = value.split(",");
+    } 
+    else {
+      res["C_G_ID"] = [];
+    }
+    if (value2 != undefined && value2 != null && value2.length != 0) {
+      res["C_M_ID"] = value2.split(",");
+    } else {
+      res["C_M_ID"] = [];
+    }
+    const res = {"C_ID": prevobj["C_ID"], "key": it, "value": JSON.stringify(country)};
+    // console.log(res);
+    console.log(JSON.stringify(country));
+    // console.log(it);
+    const rres = await editcompany(res);
+  }
+
   
   const create = async (e) => {
     if (
@@ -223,56 +312,10 @@ const EditCompany = (props) => {
 
 
   //Create the group array for dropdown
-  const g_options = [];
-  const m_options = [];
-  let prev_g;
-  let prev_m;
-  if (props.location.company != null && props.location.company != undefined) {
-    prev_g = props.location.company["C_G_ID"];
-    prev_m = props.location.company["C_M_ID"];
-  } else {
-    let company = JSON.parse(localStorage.getItem("comp"));
-    prev_g = company["C_G_ID"];
-    prev_m = company["C_M_ID"];
-  }
+
+  
 
   //set default value of groups
-  for (var i = 0; i < prev_g.length; i++) {
-    let id = prev_g[i];
-    allgroups.map((g) => {
-      if (g.G_ID === id) {
-        return def_g.push({
-          label: g.G_NAME,
-          value: g.G_ID,
-        });
-      }
-    });
-  }
-  //set default value of modules
-  for (var i = 0; i < prev_m.length; i++) {
-    let id = prev_m[i];
-    allmodules.map((g) => {
-      if (g.M_ID === id) {
-        return def_m.push({
-          label: g.M_NAME,
-          value: g.M_ID,
-        });
-      }
-    });
-  }
-  allgroups.map((g) => {
-    return g_options.push({
-      label: g.G_NAME,
-      value: g.G_ID,
-    });
-  });
-  allmodules.map((m) => {
-    return m_options.push({
-      label: m.M_NAME,
-      value: m.M_ID,
-    });
-  });
-
   return (
     <div className={classes["body"]}>
       <h1>
@@ -319,7 +362,7 @@ const EditCompany = (props) => {
           class="fas fa-asterisk"
         ></i>
       </p>
-
+      
       <MultiSelect onChange={handleOnchange} options={g_options} />
       <p className={classes["p"]}>
         Modules{" "}
